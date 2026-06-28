@@ -1,159 +1,122 @@
 <script setup lang="ts">
-import { useAppStore } from '@/stores/app'
-import ProductCard from '@/components/ProductCard.vue'
+// 首页 - 校园轻集市平台入口
 import { useRouter } from 'vue-router'
 
-const store = useAppStore()
 const router = useRouter()
 
 const categories = [
-  { label: '教材', icon: '📚', color: '#e8f8ef' },
-  { label: '数码', icon: '📱', color: '#e8f0fe' },
-  { label: '衣物', icon: '👗', color: '#fde8ec' },
-  { label: '生活', icon: '🏠', color: '#fef5e7' },
+  { name: '二手交易', icon: '🔄', desc: '闲置买卖，物尽其用', path: '/trade', color: '#e8f8ef' },
+  { name: '失物招领', icon: '🔍', desc: '捡到失物，快速归还', path: '/lost-found', color: '#e8f0fe' },
+  { name: '拼单搭子', icon: '👥', desc: '一起拼，更划算', path: '/group-buy', color: '#fef5e7' },
+  { name: '跑腿委托', icon: '🏃', desc: '代买代办，省时省力', path: '/errand', color: '#fde8ec' },
 ]
 
-const latestProducts = store.products.slice(0, 4)
-
-function goToList() {
-  router.push('/list')
-}
-function goToDetail(id: number) {
-  router.push(`/detail/${id}`)
+function goTo(path: string) {
+  router.push(path)
 }
 </script>
 
 <template>
   <div class="home-view">
-    <!-- 搜索栏 -->
-    <div class="search-bar" @click="goToList">
-      <span class="search-icon">🔍</span>
-      <span class="search-placeholder">搜索你想要的好物…</span>
-    </div>
+    <!-- 欢迎区 -->
+    <section class="welcome-section">
+      <h2>欢迎来到校园轻集市 👋</h2>
+      <p>一站式校园生活服务平台，让你的校园生活更便捷</p>
+    </section>
 
-    <!-- 分类入口 -->
+    <!-- 业务分类入口 -->
     <section class="section">
-      <h2 class="section-title">分类浏览</h2>
+      <h3 class="section-title">服务分类</h3>
       <div class="category-grid">
         <div
           v-for="cat in categories"
-          :key="cat.label"
-          class="category-item"
+          :key="cat.name"
+          class="category-card"
           :style="{ background: cat.color }"
-          @click="goToList"
+          @click="goTo(cat.path)"
         >
           <span class="cat-icon">{{ cat.icon }}</span>
-          <span class="cat-label">{{ cat.label }}</span>
+          <span class="cat-name">{{ cat.name }}</span>
+          <span class="cat-desc">{{ cat.desc }}</span>
         </div>
       </div>
     </section>
 
-    <!-- 最新发布 -->
+    <!-- 推荐信息 -->
     <section class="section">
-      <div class="section-header">
-        <h2 class="section-title">最新发布</h2>
-        <span class="section-more" @click="goToList">更多 ›</span>
-      </div>
-      <div class="product-list">
-        <div
-          v-for="product in latestProducts"
-          :key="product.id"
-          @click="goToDetail(product.id)"
-        >
-          <ProductCard :product="product" />
-        </div>
+      <h3 class="section-title">平台公告</h3>
+      <div class="notice-card card">
+        <p>📢 本平台仅提供信息发布服务，线下交易请注意安全</p>
+        <p>✅ 建议选择校内公共场所进行当面交易</p>
+        <p>🕐 平台每日 6:00—23:00 开放发布功能</p>
       </div>
     </section>
-
-    <p class="bottom-tip">— 校园轻集市 · 让闲置流转起来 —</p>
   </div>
 </template>
 
 <style scoped>
-.home-view {
-  padding-bottom: 32px;
+.welcome-section {
+  text-align: center;
+  padding: 32px 0 24px;
+}
+.welcome-section h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.welcome-section p {
+  font-size: 14px;
+  color: #909399;
 }
 
-/* 搜索栏 */
-.search-bar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--color-card);
-  border-radius: 24px;
-  padding: 12px 20px;
-  margin-bottom: 24px;
-  box-shadow: var(--shadow-sm);
-  cursor: pointer;
-}
-.search-icon {
-  font-size: 18px;
-}
-.search-placeholder {
-  color: var(--color-text-light);
-  font-size: var(--font-md);
-}
-
-/* 分类 */
 .section {
   margin-bottom: 24px;
 }
-.section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
   margin-bottom: 12px;
 }
-.section-title {
-  font-size: var(--font-lg);
-  font-weight: 600;
-}
-.section-more {
-  font-size: var(--font-sm);
-  color: var(--color-primary);
-  cursor: pointer;
-}
-.category-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-}
-.category-item {
-  border-radius: var(--radius-md);
-  padding: 16px 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-.category-item:hover {
-  transform: scale(1.05);
-}
-.cat-icon {
-  font-size: 32px;
-}
-.cat-label {
-  font-size: var(--font-sm);
-  color: var(--color-text-secondary);
-  font-weight: 500;
-}
 
-/* 商品列表 */
-.product-list {
+.category-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
 }
-.product-list > * {
+.category-card {
+  border-radius: 10px;
+  padding: 20px 16px;
   cursor: pointer;
+  transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.category-card:hover {
+  transform: translateY(-2px);
+}
+.cat-icon {
+  font-size: 36px;
+}
+.cat-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #303133;
+}
+.cat-desc {
+  font-size: 12px;
+  color: #909399;
 }
 
-.bottom-tip {
-  text-align: center;
-  color: var(--color-text-light);
-  font-size: var(--font-xs);
-  margin-top: 16px;
+.notice-card {
+  padding: 16px;
+}
+.notice-card p {
+  font-size: 14px;
+  color: #606266;
+  margin-bottom: 6px;
+}
+.notice-card p:last-child {
+  margin-bottom: 0;
 }
 </style>
