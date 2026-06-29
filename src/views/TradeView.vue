@@ -1,29 +1,47 @@
 <script setup lang="ts">
-// 二手交易页 - 展示二手商品列表
-import { useAppStore } from '@/stores/app'
-import ProductCard from '@/components/ProductCard.vue'
-import { useRouter } from 'vue-router'
+import { ref, onMounted } from 'vue'
+import { getTrades, type TradeItem } from '@/api/trade'
+import ItemCard from '@/components/ItemCard.vue'
+import EmptyState from '@/components/EmptyState.vue'
 
-const store = useAppStore()
-const router = useRouter()
+const trades = ref<TradeItem[]>([])
+const loading = ref(true)
 
-function goToDetail(id: number) {
-  router.push(`/detail/${id}`)
-}
+onMounted(async () => {
+  try {
+    const res = await getTrades()
+    trades.value = res.data
+  } catch (e) {
+    console.error('获取二手交易列表失败', e)
+  } finally {
+    loading.value = false
+  }
+})
 </script>
 
 <template>
   <div class="trade-view">
-    <h2 class="page-title">二手交易</h2>
+    <h2 class="page-title">🔄 二手交易</h2>
     <p class="page-desc">校园闲置物品交易，让每一件物品都找到新主人</p>
 
-    <div class="product-grid">
-      <div
-        v-for="product in store.products"
-        :key="product.id"
-        @click="goToDetail(product.id)"
-      >
-        <ProductCard :product="product" />
+    <div v-if="loading" class="loading">加载中…</div>
+
+    <EmptyState
+      v-else-if="trades.length === 0"
+      icon="📦"
+      text="暂无二手交易信息"
+    />
+
+    <div v-else class="item-list">
+      <div v-for="item in trades" :key="item.id">
+        <ItemCard
+          :title="item.title"
+          :subtitle="item.desc"
+          :tags="[item.category, item.condition]"
+          :status="item.status"
+          :highlight="'¥' + item.price"
+          :footer="item.publisher + ' · ' + item.location"
+        />
       </div>
     </div>
   </div>
@@ -40,12 +58,15 @@ function goToDetail(id: number) {
   color: #909399;
   margin-bottom: 16px;
 }
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+.item-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
-.product-grid > * {
-  cursor: pointer;
+.loading {
+  text-align: center;
+  padding: 60px;
+  color: #909399;
+  font-size: 14px;
 }
 </style>
