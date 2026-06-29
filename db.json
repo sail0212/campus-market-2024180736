@@ -11,9 +11,24 @@
       "publishTime": "2026-06-28T10:00:00Z",
       "location": "北区宿舍3号楼",
       "image": "",
+      "images": [],
       "desc": "大一买的，基本全新，只有前面几页有笔记。考研换专业了用不上，便宜出给学弟学妹。",
       "status": "open",
-      "views": 128
+      "views": 128,
+      "contact": "微信：senior_zhang",
+      "tags": [
+        "教材",
+        "考研",
+        "数学"
+      ],
+      "specs": {
+        "出版社": "高等教育出版社",
+        "版次": "第七版",
+        "册数": "上下册"
+      },
+      "favorited": 15,
+      "tradeLocation": "北区食堂门口",
+      "updatedAt": "2026-06-28T10:00:00Z"
     },
     {
       "id": 2,
@@ -26,9 +41,25 @@
       "publishTime": "2026-06-28T08:30:00Z",
       "location": "南区宿舍1号楼",
       "image": "",
+      "images": [],
       "desc": "自用一年，一直带保护壳和钢化膜，屏幕无划痕，电池健康92%。送原装充电器和保护壳。",
       "status": "open",
-      "views": 456
+      "views": 456,
+      "contact": "QQ：123456789",
+      "tags": [
+        "iPad",
+        "苹果",
+        "平板"
+      ],
+      "specs": {
+        "型号": "iPad Pro 2022",
+        "尺寸": "11寸",
+        "存储": "128G",
+        "颜色": "深空灰"
+      },
+      "favorited": 42,
+      "tradeLocation": "南区食堂门口",
+      "updatedAt": "2026-06-28T08:30:00Z"
     },
     {
       "id": 3,
@@ -41,9 +72,24 @@
       "publishTime": "2026-06-27T16:00:00Z",
       "location": "东区宿舍5号楼",
       "image": "",
+      "images": [],
       "desc": "三档调光，USB充电，触摸开关。用了不到一学期，毕业带不走。",
       "status": "open",
-      "views": 89
+      "views": 89,
+      "contact": "微信：wang_grad",
+      "tags": [
+        "台灯",
+        "LED",
+        "宿舍神器"
+      ],
+      "specs": {
+        "供电": "USB充电",
+        "调光": "三档",
+        "开关": "触摸式"
+      },
+      "favorited": 8,
+      "tradeLocation": "东区宿舍楼下",
+      "updatedAt": "2026-06-27T16:00:00Z"
     },
     {
       "id": 4,
@@ -56,9 +102,25 @@
       "publishTime": "2026-06-27T14:00:00Z",
       "location": "西区宿舍2号楼",
       "image": "",
+      "images": [],
       "desc": "买大了，仅试穿一次。灰色加绒款，适合175-180。",
       "status": "open",
-      "views": 210
+      "views": 210,
+      "contact": "微信：zhang_style",
+      "tags": [
+        "卫衣",
+        "秋季",
+        "加绒"
+      ],
+      "specs": {
+        "尺码": "L",
+        "颜色": "灰色",
+        "款式": "加绒",
+        "品牌": "优衣库"
+      },
+      "favorited": 23,
+      "tradeLocation": "西区快递点",
+      "updatedAt": "2026-06-27T14:00:00Z"
     },
     {
       "id": 5,
@@ -71,9 +133,23 @@
       "publishTime": "2026-06-26T20:00:00Z",
       "location": "图书馆自习室",
       "image": "",
+      "images": [],
       "desc": "去年考研买的，单词背了1/3，练习题全新没写。今年上岸了出给下一届。",
       "status": "open",
-      "views": 333
+      "views": 333,
+      "contact": "QQ：987654321",
+      "tags": [
+        "考研",
+        "英语",
+        "红宝书"
+      ],
+      "specs": {
+        "出版社": "新东方",
+        "册数": "3册"
+      },
+      "favorited": 35,
+      "tradeLocation": "图书馆一楼大厅",
+      "updatedAt": "2026-06-26T20:00:00Z"
     },
     {
       "id": 6,
@@ -86,9 +162,25 @@
       "publishTime": "2026-06-26T12:00:00Z",
       "location": "北区宿舍8号楼",
       "image": "",
+      "images": [],
       "desc": "实习公司发的，用了两个月，手感确实好但不太适合打游戏，换个游戏鼠标所以出。",
       "status": "open",
-      "views": 178
+      "views": 178,
+      "contact": "微信：gamer_xiao",
+      "tags": [
+        "罗技",
+        "鼠标",
+        "无线"
+      ],
+      "specs": {
+        "品牌": "罗技",
+        "型号": "MX Master 3S",
+        "连接": "无线蓝牙",
+        "颜色": "黑色"
+      },
+      "favorited": 19,
+      "tradeLocation": "北区食堂",
+      "updatedAt": "2026-06-26T12:00:00Z"
     },
     {
       "id": 7,
@@ -101,9 +193,24 @@
       "publishTime": "2026-06-25T18:00:00Z",
       "location": "南区宿舍6号楼",
       "image": "",
+      "images": [],
       "desc": "去年双十一购入，还在保。降噪效果很好，配件齐全。",
       "status": "open",
-      "views": 520
+      "views": 520,
+      "contact": "微信：music_lover",
+      "tags": [
+        "AirPods",
+        "苹果",
+        "耳机"
+      ],
+      "specs": {
+        "型号": "AirPods Pro 2",
+        "保修": "在保",
+        "配件": "齐全"
+      },
+      "favorited": 56,
+      "tradeLocation": "南区宿舍楼下",
+      "updatedAt": "2026-06-25T18:00:00Z"
     },
     {
       "id": 8,
@@ -115,9 +222,23 @@
       "publishTime": "2026-06-25T10:00:00Z",
       "location": "东区宿舍2号楼",
       "image": "",
+      "images": [],
       "desc": "宿舍自用，无破损，搬家急出。镜面有点灰擦一下就好。",
       "status": "open",
-      "views": 67
+      "views": 67,
+      "contact": "微信：mover_2026",
+      "tags": [
+        "镜子",
+        "落地镜",
+        "宿舍"
+      ],
+      "specs": {
+        "尺寸": "40×150cm",
+        "类型": "落地式"
+      },
+      "favorited": 6,
+      "tradeLocation": "东区宿舍2号楼下",
+      "updatedAt": "2026-06-25T10:00:00Z"
     },
     {
       "id": 9,
@@ -130,9 +251,25 @@
       "publishTime": "2026-06-25T18:00:00Z",
       "location": "西区宿舍3号楼",
       "image": "",
+      "images": [],
       "desc": "考研期间买的，基本只用来刷网课。全套配件齐全，带原装手写笔和皮套。",
       "status": "open",
-      "views": 299
+      "views": 299,
+      "contact": "微信：tech_fan",
+      "tags": [
+        "华为",
+        "平板",
+        "MatePad"
+      ],
+      "specs": {
+        "品牌": "华为",
+        "型号": "MatePad 11",
+        "存储": "8+128G",
+        "配件": "手写笔+皮套"
+      },
+      "favorited": 31,
+      "tradeLocation": "西区食堂门口",
+      "updatedAt": "2026-06-25T18:00:00Z"
     },
     {
       "id": 10,
@@ -145,9 +282,23 @@
       "publishTime": "2026-06-25T09:00:00Z",
       "location": "南区宿舍2号楼",
       "image": "",
+      "images": [],
       "desc": "今年3月买的，做了大概1/3，铅笔写的可以擦掉。12月考试的同学可以提前备着。",
       "status": "open",
-      "views": 156
+      "views": 156,
+      "contact": "QQ：567891234",
+      "tags": [
+        "四级",
+        "英语",
+        "真题"
+      ],
+      "specs": {
+        "出版社": "星火英语",
+        "年份": "2025版"
+      },
+      "favorited": 12,
+      "tradeLocation": "南区快递驿站",
+      "updatedAt": "2026-06-25T09:00:00Z"
     },
     {
       "id": 11,
@@ -160,9 +311,23 @@
       "publishTime": "2026-06-24T15:00:00Z",
       "location": "北区宿舍7号楼",
       "image": "",
+      "images": [],
       "desc": "宿舍上铺神器，带杯托和iPad支架槽。毕业带不走，便宜出了。",
       "status": "open",
-      "views": 201
+      "views": 201,
+      "contact": "微信：qingcang_2026",
+      "tags": [
+        "折叠桌",
+        "床上桌",
+        "宿舍"
+      ],
+      "specs": {
+        "款式": "加大款",
+        "功能": "杯托+支架槽"
+      },
+      "favorited": 18,
+      "tradeLocation": "北区7号楼门口",
+      "updatedAt": "2026-06-24T15:00:00Z"
     },
     {
       "id": 12,
@@ -175,9 +340,25 @@
       "publishTime": "2026-06-24T10:00:00Z",
       "location": "东区宿舍1号楼",
       "image": "",
+      "images": [],
       "desc": "穿了一个学期，鞋底有正常磨损，鞋面保持很干净。尺码偏大，42码适合平时穿42.5-43的。",
       "status": "open",
-      "views": 387
+      "views": 387,
+      "contact": "微信：sneaker_jay",
+      "tags": [
+        "Nike",
+        "AF1",
+        "运动鞋"
+      ],
+      "specs": {
+        "品牌": "Nike",
+        "款式": "Air Force 1",
+        "尺码": "42",
+        "颜色": "白色"
+      },
+      "favorited": 44,
+      "tradeLocation": "东区运动场门口",
+      "updatedAt": "2026-06-24T10:00:00Z"
     },
     {
       "id": 13,
@@ -190,9 +371,25 @@
       "publishTime": "2026-06-23T20:00:00Z",
       "location": "西区宿舍6号楼",
       "image": "",
+      "images": [],
       "desc": "大一想学的，买了之后摸了不到10次，弦已松。送变调夹+调音器+琴包。",
       "status": "open",
-      "views": 167
+      "views": 167,
+      "contact": "微信：guitar_lee",
+      "tags": [
+        "吉他",
+        "Yamaha",
+        "乐器"
+      ],
+      "specs": {
+        "品牌": "Yamaha",
+        "型号": "F310",
+        "类型": "民谣木吉他",
+        "赠品": "变调夹+调音器+琴包"
+      },
+      "favorited": 22,
+      "tradeLocation": "西区宿舍楼下",
+      "updatedAt": "2026-06-23T20:00:00Z"
     },
     {
       "id": 14,
@@ -205,9 +402,25 @@
       "publishTime": "2026-06-23T14:00:00Z",
       "location": "南区宿舍4号楼",
       "image": "",
+      "images": [],
       "desc": "用了大半年的主力键盘，换了无线的所以出。茶轴适合打字和游戏，PBT键帽不打油。",
       "status": "open",
-      "views": 234
+      "views": 234,
+      "contact": "QQ：345678901",
+      "tags": [
+        "键盘",
+        "机械",
+        "IKBC"
+      ],
+      "specs": {
+        "品牌": "IKBC",
+        "型号": "C87",
+        "轴体": "茶轴",
+        "键帽": "PBT"
+      },
+      "favorited": 27,
+      "tradeLocation": "南区食堂",
+      "updatedAt": "2026-06-23T14:00:00Z"
     },
     {
       "id": 15,
@@ -220,9 +433,23 @@
       "publishTime": "2026-06-22T11:00:00Z",
       "location": "北区宿舍2号楼",
       "image": "",
+      "images": [],
       "desc": "大二课程的教材，有部分笔记但字迹工整，适合预习和复习用。",
       "status": "open",
-      "views": 98
+      "views": 98,
+      "contact": "微信：math_senior",
+      "tags": [
+        "概率论",
+        "数学",
+        "教材"
+      ],
+      "specs": {
+        "出版社": "浙大出版社",
+        "版次": "第四版"
+      },
+      "favorited": 9,
+      "tradeLocation": "教学楼A栋",
+      "updatedAt": "2026-06-22T11:00:00Z"
     },
     {
       "id": 16,
@@ -235,9 +462,24 @@
       "publishTime": "2026-06-21T19:00:00Z",
       "location": "东区宿舍3号楼",
       "image": "",
+      "images": [],
       "desc": "一个人刚好，煮饭煮粥煲汤都行。注意：用的时候注意别被宿管发现。",
       "status": "open",
-      "views": 445
+      "views": 445,
+      "contact": "微信：chef_li",
+      "tags": [
+        "电饭煲",
+        "美的",
+        "宿舍"
+      ],
+      "specs": {
+        "品牌": "美的",
+        "容量": "2L",
+        "功能": "煮饭/煮粥/煲汤"
+      },
+      "favorited": 38,
+      "tradeLocation": "东区3号楼后门",
+      "updatedAt": "2026-06-21T19:00:00Z"
     }
   ],
   "lostFounds": [
@@ -250,9 +492,20 @@
       "location": "图书馆二楼阅读区",
       "eventTime": "2026-06-28T09:00:00Z",
       "publishTime": "2026-06-28T11:00:00Z",
-      "contact": "张同学 138xxxx1234",
+      "contact": "张同学",
+      "contactPhone": "138xxxx1234",
       "desc": "黑色短款钱包，内有身份证和校园卡，非常重要！",
-      "status": "open"
+      "status": "open",
+      "images": [],
+      "reward": 50,
+      "claimLocation": "图书馆服务台",
+      "resolvedAt": null,
+      "finder": null,
+      "tags": [
+        "钱包",
+        "证件",
+        "贵重"
+      ]
     },
     {
       "id": 2,
@@ -263,9 +516,19 @@
       "location": "操场入口处",
       "eventTime": "2026-06-28T07:30:00Z",
       "publishTime": "2026-06-28T12:00:00Z",
-      "contact": "李同学 139xxxx5678",
+      "contact": "李同学",
+      "contactPhone": "139xxxx5678",
       "desc": "3把钥匙+1个U盘，请失主联系确认。",
-      "status": "open"
+      "status": "open",
+      "images": [],
+      "reward": null,
+      "claimLocation": "操场管理处",
+      "resolvedAt": null,
+      "finder": "李同学",
+      "tags": [
+        "钥匙",
+        "U盘"
+      ]
     },
     {
       "id": 3,
@@ -276,9 +539,20 @@
       "location": "教学楼A栋201教室",
       "eventTime": "2026-06-27T15:00:00Z",
       "publishTime": "2026-06-27T17:00:00Z",
-      "contact": "王同学 136xxxx9012",
+      "contact": "王同学",
+      "contactPhone": "136xxxx9012",
       "desc": "白色AirPods Pro充电盒，有蓝色保护壳。",
-      "status": "open"
+      "status": "open",
+      "images": [],
+      "reward": 30,
+      "claimLocation": "教学楼A栋管理员处",
+      "resolvedAt": null,
+      "finder": null,
+      "tags": [
+        "AirPods",
+        "充电盒",
+        "电子"
+      ]
     },
     {
       "id": 4,
@@ -289,9 +563,19 @@
       "location": "食堂二楼",
       "eventTime": "2026-06-27T12:00:00Z",
       "publishTime": "2026-06-27T13:00:00Z",
-      "contact": "赵同学 137xxxx3456",
+      "contact": "赵同学",
+      "contactPhone": "137xxxx3456",
       "desc": "计算机学院张同学的学生证，请速来领取。",
-      "status": "closed"
+      "status": "closed",
+      "images": [],
+      "reward": null,
+      "claimLocation": "食堂服务台",
+      "resolvedAt": "2026-06-27T18:00:00Z",
+      "finder": "赵同学",
+      "tags": [
+        "学生证",
+        "证件"
+      ]
     },
     {
       "id": 5,
@@ -302,9 +586,19 @@
       "location": "体育馆",
       "eventTime": "2026-06-26T16:00:00Z",
       "publishTime": "2026-06-26T18:00:00Z",
-      "contact": "孙同学 135xxxx7890",
+      "contact": "孙同学",
+      "contactPhone": "135xxxx7890",
       "desc": "膳魔师500ml蓝色保温杯，杯身有贴纸。",
-      "status": "open"
+      "status": "open",
+      "images": [],
+      "reward": null,
+      "claimLocation": "体育馆前台",
+      "resolvedAt": null,
+      "finder": null,
+      "tags": [
+        "保温杯",
+        "膳魔师"
+      ]
     },
     {
       "id": 6,
@@ -315,9 +609,19 @@
       "location": "机房B301",
       "eventTime": "2026-06-26T14:00:00Z",
       "publishTime": "2026-06-27T09:00:00Z",
-      "contact": "周同学 131xxxx2345",
+      "contact": "周同学",
+      "contactPhone": "131xxxx2345",
       "desc": "金士顿银色32G U盘，请说明文件内容验证。",
-      "status": "closed"
+      "status": "closed",
+      "images": [],
+      "reward": null,
+      "claimLocation": "机房管理员处",
+      "resolvedAt": "2026-06-27T16:00:00Z",
+      "finder": "周同学",
+      "tags": [
+        "U盘",
+        "金士顿"
+      ]
     },
     {
       "id": 7,
@@ -328,9 +632,19 @@
       "location": "图书馆入口闸机",
       "eventTime": "2026-06-25T10:00:00Z",
       "publishTime": "2026-06-25T11:00:00Z",
-      "contact": "吴同学 132xxxx6789",
+      "contact": "吴同学",
+      "contactPhone": "132xxxx6789",
       "desc": "在闸机上捡到，已放至图书馆服务台。",
-      "status": "closed"
+      "status": "closed",
+      "images": [],
+      "reward": null,
+      "claimLocation": "图书馆服务台",
+      "resolvedAt": "2026-06-25T15:00:00Z",
+      "finder": "吴同学",
+      "tags": [
+        "校园卡",
+        "证件"
+      ]
     },
     {
       "id": 8,
@@ -341,9 +655,20 @@
       "location": "操场跑道旁",
       "eventTime": "2026-06-25T07:00:00Z",
       "publishTime": "2026-06-25T09:00:00Z",
-      "contact": "跑步中的小陈 150xxxx3344",
+      "contact": "跑步中的小陈",
+      "contactPhone": "150xxxx3344",
       "desc": "晨跑时掉了，黑色表带配黑色表盘，屏幕上有一条细微划痕。",
-      "status": "open"
+      "status": "open",
+      "images": [],
+      "reward": 20,
+      "claimLocation": "操场管理处",
+      "resolvedAt": null,
+      "finder": null,
+      "tags": [
+        "手环",
+        "华为",
+        "运动"
+      ]
     },
     {
       "id": 9,
@@ -354,9 +679,19 @@
       "location": "教学楼B栋一楼走廊",
       "eventTime": "2026-06-24T17:00:00Z",
       "publishTime": "2026-06-24T18:00:00Z",
-      "contact": "好心人刘同学 188xxxx5566",
+      "contact": "好心人刘同学",
+      "contactPhone": "188xxxx5566",
       "desc": "深蓝色三折伞，天堂牌，挂在走廊栏杆上。",
-      "status": "open"
+      "status": "open",
+      "images": [],
+      "reward": null,
+      "claimLocation": "教学楼B栋管理员处",
+      "resolvedAt": null,
+      "finder": "刘同学",
+      "tags": [
+        "雨伞",
+        "天堂"
+      ]
     },
     {
       "id": 10,
@@ -368,8 +703,18 @@
       "eventTime": "2026-06-24T12:00:00Z",
       "publishTime": "2026-06-24T14:00:00Z",
       "contact": "食堂阿姨",
+      "contactPhone": "",
       "desc": "吃饭时忘在桌上了，度数大概300-400度的样子。放食堂失物招领处了。",
-      "status": "open"
+      "status": "open",
+      "images": [],
+      "reward": null,
+      "claimLocation": "南区食堂失物招领处",
+      "resolvedAt": null,
+      "finder": "食堂阿姨",
+      "tags": [
+        "眼镜",
+        "近视"
+      ]
     },
     {
       "id": 11,
@@ -380,9 +725,19 @@
       "location": "实验楼C座电梯口",
       "eventTime": "2026-06-23T16:00:00Z",
       "publishTime": "2026-06-23T17:00:00Z",
-      "contact": "值日生黄同学 133xxxx1122",
+      "contact": "值日生黄同学",
+      "contactPhone": "133xxxx1122",
       "desc": "物理实验报告，封面写有'大三-电子信息工程'，已交到系办公室。",
-      "status": "closed"
+      "status": "closed",
+      "images": [],
+      "reward": null,
+      "claimLocation": "系办公室",
+      "resolvedAt": "2026-06-24T10:00:00Z",
+      "finder": "黄同学",
+      "tags": [
+        "实验报告",
+        "文件"
+      ]
     },
     {
       "id": 12,
@@ -393,9 +748,20 @@
       "location": "图书馆三楼B区",
       "eventTime": "2026-06-23T10:00:00Z",
       "publishTime": "2026-06-23T12:00:00Z",
-      "contact": "找耳机的周周 186xxxx9900",
+      "contact": "找耳机的周周",
+      "contactPhone": "186xxxx9900",
       "desc": "华为FreeBuds 5i 左耳，白色。翻遍了包包和宿舍都没找到，应该是掉在图书馆了。",
-      "status": "open"
+      "status": "open",
+      "images": [],
+      "reward": 15,
+      "claimLocation": "图书馆服务台",
+      "resolvedAt": null,
+      "finder": null,
+      "tags": [
+        "耳机",
+        "华为",
+        "蓝牙"
+      ]
     },
     {
       "id": 13,
@@ -406,9 +772,19 @@
       "location": "澡堂女更衣室",
       "eventTime": "2026-06-22T20:00:00Z",
       "publishTime": "2026-06-22T21:00:00Z",
-      "contact": "热心同学 177xxxx3344",
+      "contact": "热心同学",
+      "contactPhone": "177xxxx3344",
       "desc": "捡到一张校园水卡，余额大概还有30多块。交到宿管阿姨那里了。",
-      "status": "closed"
+      "status": "closed",
+      "images": [],
+      "reward": null,
+      "claimLocation": "宿管处",
+      "resolvedAt": "2026-06-23T08:00:00Z",
+      "finder": "热心同学",
+      "tags": [
+        "水卡",
+        "证件"
+      ]
     },
     {
       "id": 14,
@@ -420,8 +796,18 @@
       "eventTime": "2026-06-22T14:00:00Z",
       "publishTime": "2026-06-22T15:00:00Z",
       "contact": "快递小哥",
+      "contactPhone": "",
       "desc": "一个未拆封的小包裹，收件人名字模糊看不清。暂放在北门保安室。",
-      "status": "open"
+      "status": "open",
+      "images": [],
+      "reward": null,
+      "claimLocation": "北门保安室",
+      "resolvedAt": null,
+      "finder": "快递小哥",
+      "tags": [
+        "快递",
+        "包裹"
+      ]
     }
   ],
   "groupBuys": [
@@ -438,7 +824,26 @@
       "price": "12",
       "publishTime": "2026-06-28T14:00:00Z",
       "desc": "一点点奶茶，两杯起拼，每人约12元。",
-      "status": "open"
+      "status": "open",
+      "images": [],
+      "contact": "微信：milktea_lover",
+      "participants": [
+        {
+          "name": "奶茶控",
+          "joinedAt": "2026-06-28T14:00:00Z"
+        },
+        {
+          "name": "小甜甜",
+          "joinedAt": "2026-06-28T14:30:00Z"
+        }
+      ],
+      "requirements": "男女不限，爱喝奶茶就行",
+      "tags": [
+        "奶茶",
+        "一点点",
+        "拼单"
+      ],
+      "updatedAt": "2026-06-28T14:30:00Z"
     },
     {
       "id": 2,
@@ -453,7 +858,22 @@
       "price": "0",
       "publishTime": "2026-06-28T08:00:00Z",
       "desc": "找一个自律的研友，每天打卡互相监督，图书馆固定座位。",
-      "status": "open"
+      "status": "open",
+      "images": [],
+      "contact": "QQ：111222333",
+      "participants": [
+        {
+          "name": "考研人",
+          "joinedAt": "2026-06-28T08:00:00Z"
+        }
+      ],
+      "requirements": "考研党，能坚持每天来图书馆，互相抽查背诵",
+      "tags": [
+        "考研",
+        "搭子",
+        "学习"
+      ],
+      "updatedAt": "2026-06-28T08:00:00Z"
     },
     {
       "id": 3,
@@ -468,7 +888,22 @@
       "price": "15",
       "publishTime": "2026-06-28T11:00:00Z",
       "desc": "凑满100减30，缺两人，人均15元。",
-      "status": "open"
+      "status": "open",
+      "images": [],
+      "contact": "微信：foodie_2026",
+      "participants": [
+        {
+          "name": "干饭人",
+          "joinedAt": "2026-06-28T11:00:00Z"
+        }
+      ],
+      "requirements": "没有忌口就行，口味大众化",
+      "tags": [
+        "外卖",
+        "拼单",
+        "满减"
+      ],
+      "updatedAt": "2026-06-28T11:00:00Z"
     },
     {
       "id": 4,
@@ -483,7 +918,34 @@
       "price": "0",
       "publishTime": "2026-06-28T10:00:00Z",
       "desc": "来个打野，我们四缺一，段位王者，心态好。",
-      "status": "open"
+      "status": "open",
+      "images": [],
+      "contact": "微信：gamer_pro",
+      "participants": [
+        {
+          "name": "游戏达人",
+          "joinedAt": "2026-06-28T10:00:00Z"
+        },
+        {
+          "name": "中路杀神",
+          "joinedAt": "2026-06-28T10:15:00Z"
+        },
+        {
+          "name": "辅助天花板",
+          "joinedAt": "2026-06-28T10:30:00Z"
+        },
+        {
+          "name": "射手不坑",
+          "joinedAt": "2026-06-28T11:00:00Z"
+        }
+      ],
+      "requirements": "段位王者以上，会打野位，心态好不骂人",
+      "tags": [
+        "王者荣耀",
+        "五排",
+        "游戏"
+      ],
+      "updatedAt": "2026-06-28T11:00:00Z"
     },
     {
       "id": 5,
@@ -498,7 +960,26 @@
       "price": "20",
       "publishTime": "2026-06-28T09:00:00Z",
       "desc": "明天上午去火车站，已有2人，再拼2人，滴滴拼车均摊。",
-      "status": "open"
+      "status": "open",
+      "images": [],
+      "contact": "微信：train_user",
+      "participants": [
+        {
+          "name": "赶车人",
+          "joinedAt": "2026-06-28T09:00:00Z"
+        },
+        {
+          "name": "小李",
+          "joinedAt": "2026-06-28T09:30:00Z"
+        }
+      ],
+      "requirements": "明天上午8点前北门集合，每人约20元",
+      "tags": [
+        "拼车",
+        "火车站",
+        "出行"
+      ],
+      "updatedAt": "2026-06-28T09:30:00Z"
     },
     {
       "id": 6,
@@ -513,7 +994,22 @@
       "price": "0",
       "publishTime": "2026-06-27T16:00:00Z",
       "desc": "一个人总是偷懒，找个伙伴互相督促，每周三次。",
-      "status": "open"
+      "status": "open",
+      "images": [],
+      "contact": "微信：gym_buddy",
+      "participants": [
+        {
+          "name": "健身小白",
+          "joinedAt": "2026-06-27T16:00:00Z"
+        }
+      ],
+      "requirements": "每周至少三次，最好下午时间，有无基础都行",
+      "tags": [
+        "健身",
+        "搭子",
+        "运动"
+      ],
+      "updatedAt": "2026-06-27T16:00:00Z"
     },
     {
       "id": 7,
@@ -528,7 +1024,30 @@
       "price": "25",
       "publishTime": "2026-06-28T16:00:00Z",
       "desc": "万达影院，周六下午场，6人可团购价25元/人（原价40）。目前3人，再拼3人。",
-      "status": "open"
+      "status": "open",
+      "images": [],
+      "contact": "微信：movie_fan",
+      "participants": [
+        {
+          "name": "电影搭子",
+          "joinedAt": "2026-06-28T16:00:00Z"
+        },
+        {
+          "name": "科幻迷",
+          "joinedAt": "2026-06-28T16:20:00Z"
+        },
+        {
+          "name": "周末无聊",
+          "joinedAt": "2026-06-28T16:45:00Z"
+        }
+      ],
+      "requirements": "周六下午场，校门口集合一起去",
+      "tags": [
+        "电影",
+        "流浪地球",
+        "拼团"
+      ],
+      "updatedAt": "2026-06-28T16:45:00Z"
     },
     {
       "id": 8,
@@ -543,7 +1062,26 @@
       "price": "0",
       "publishTime": "2026-06-28T07:00:00Z",
       "desc": "全国大学生数学建模竞赛，已有编程和写作方向，缺一个建模分析的同学。",
-      "status": "open"
+      "status": "open",
+      "images": [],
+      "contact": "QQ：445566778",
+      "participants": [
+        {
+          "name": "建模小白",
+          "joinedAt": "2026-06-28T07:00:00Z"
+        },
+        {
+          "name": "Python高手",
+          "joinedAt": "2026-06-28T08:00:00Z"
+        }
+      ],
+      "requirements": "需要数学/统计专业或有建模经验的同学",
+      "tags": [
+        "数学建模",
+        "竞赛",
+        "组队"
+      ],
+      "updatedAt": "2026-06-28T08:00:00Z"
     },
     {
       "id": 9,
@@ -558,7 +1096,26 @@
       "price": "30",
       "publishTime": "2026-06-27T20:00:00Z",
       "desc": "三只松鼠零食大礼包，5人拼团价30元/人（原价59），超划算！",
-      "status": "open"
+      "status": "open",
+      "images": [],
+      "contact": "微信：snack_king",
+      "participants": [
+        {
+          "name": "零食大王",
+          "joinedAt": "2026-06-27T20:00:00Z"
+        },
+        {
+          "name": "吃货一枚",
+          "joinedAt": "2026-06-27T21:00:00Z"
+        }
+      ],
+      "requirements": "凑满5人开团，人多更优惠",
+      "tags": [
+        "零食",
+        "三只松鼠",
+        "拼团"
+      ],
+      "updatedAt": "2026-06-27T21:00:00Z"
     },
     {
       "id": 10,
@@ -573,7 +1130,22 @@
       "price": "0",
       "publishTime": "2026-06-27T15:00:00Z",
       "desc": "零基础开始学Python，想找个人一起看网课做练习，互相debug。",
-      "status": "open"
+      "status": "open",
+      "images": [],
+      "contact": "微信：python_newbie",
+      "participants": [
+        {
+          "name": "编程菜鸟",
+          "joinedAt": "2026-06-27T15:00:00Z"
+        }
+      ],
+      "requirements": "零基础也欢迎，能坚持每周至少2次一起学习就行",
+      "tags": [
+        "Python",
+        "编程",
+        "搭子"
+      ],
+      "updatedAt": "2026-06-27T15:00:00Z"
     },
     {
       "id": 11,
@@ -588,7 +1160,42 @@
       "price": "8",
       "publishTime": "2026-06-26T10:00:00Z",
       "desc": "拼团打印论文，10人起拼8元/本（原价25）。已经有6个人了，都是大四的！",
-      "status": "open"
+      "status": "open",
+      "images": [],
+      "contact": "微信：senior_print",
+      "participants": [
+        {
+          "name": "大四老学姐",
+          "joinedAt": "2026-06-26T10:00:00Z"
+        },
+        {
+          "name": "论文狗1号",
+          "joinedAt": "2026-06-26T11:00:00Z"
+        },
+        {
+          "name": "论文狗2号",
+          "joinedAt": "2026-06-26T12:00:00Z"
+        },
+        {
+          "name": "论文狗3号",
+          "joinedAt": "2026-06-27T09:00:00Z"
+        },
+        {
+          "name": "论文狗4号",
+          "joinedAt": "2026-06-27T14:00:00Z"
+        },
+        {
+          "name": "论文终结者",
+          "joinedAt": "2026-06-28T10:00:00Z"
+        }
+      ],
+      "requirements": "仅限毕业论文打印，胶装封面另算",
+      "tags": [
+        "打印",
+        "论文",
+        "拼团"
+      ],
+      "updatedAt": "2026-06-28T10:00:00Z"
     },
     {
       "id": 12,
@@ -603,7 +1210,26 @@
       "price": "0",
       "publishTime": "2026-06-25T14:00:00Z",
       "desc": "推广校园小程序，按推广人数结算。时间自由，月入800-2000。",
-      "status": "open"
+      "status": "open",
+      "images": [],
+      "contact": "微信：xiaoming_biz",
+      "participants": [
+        {
+          "name": "创业小明",
+          "joinedAt": "2026-06-25T14:00:00Z"
+        },
+        {
+          "name": "兼职达人",
+          "joinedAt": "2026-06-26T10:00:00Z"
+        }
+      ],
+      "requirements": "在校学生，善于沟通，有推广经验优先",
+      "tags": [
+        "兼职",
+        "代理",
+        "推广"
+      ],
+      "updatedAt": "2026-06-26T10:00:00Z"
     },
     {
       "id": 13,
@@ -618,7 +1244,30 @@
       "price": "0",
       "publishTime": "2026-06-25T09:00:00Z",
       "desc": "周末爬北山森林公园，轻装往返约4小时。AA制车费和午餐。已有3人。",
-      "status": "open"
+      "status": "open",
+      "images": [],
+      "contact": "微信：hiking_fun",
+      "participants": [
+        {
+          "name": "户外爱好者",
+          "joinedAt": "2026-06-25T09:00:00Z"
+        },
+        {
+          "name": "登山达人",
+          "joinedAt": "2026-06-25T15:00:00Z"
+        },
+        {
+          "name": "自然爱好者",
+          "joinedAt": "2026-06-26T08:00:00Z"
+        }
+      ],
+      "requirements": "体力尚可，穿运动鞋，自备水和午餐",
+      "tags": [
+        "爬山",
+        "户外",
+        "周末"
+      ],
+      "updatedAt": "2026-06-26T08:00:00Z"
     },
     {
       "id": 14,
@@ -633,7 +1282,30 @@
       "price": "15",
       "publishTime": "2026-06-24T18:00:00Z",
       "desc": "某网课平台月度VIP，可同时登录3个设备，拼单15元/月/人。",
-      "status": "closed"
+      "status": "closed",
+      "images": [],
+      "contact": "QQ：999888777",
+      "participants": [
+        {
+          "name": "考证人",
+          "joinedAt": "2026-06-24T18:00:00Z"
+        },
+        {
+          "name": "学习使我快乐",
+          "joinedAt": "2026-06-25T10:00:00Z"
+        },
+        {
+          "name": "过儿",
+          "joinedAt": "2026-06-25T14:00:00Z"
+        }
+      ],
+      "requirements": "拼满即止，平台支持3台设备同时在线",
+      "tags": [
+        "网课",
+        "拼单",
+        "VIP"
+      ],
+      "updatedAt": "2026-06-25T14:00:00Z"
     }
   ],
   "errands": [
@@ -649,7 +1321,17 @@
       "publisher": "宅宿舍中",
       "publishTime": "2026-06-28T11:30:00Z",
       "desc": "一份红烧肉盖饭+一瓶矿泉水，送到南区3号楼302。",
-      "status": "open"
+      "status": "open",
+      "images": [],
+      "contact": "微信：lazy_dorm",
+      "urgency": "high",
+      "acceptor": null,
+      "completedAt": null,
+      "tags": [
+        "午饭",
+        "代买",
+        "急"
+      ]
     },
     {
       "id": 2,
@@ -663,7 +1345,17 @@
       "publisher": "忙碌的小王",
       "publishTime": "2026-06-28T09:00:00Z",
       "desc": "帮忙去行政楼教务处盖个章，表格已准备好，拿去盖章即可。",
-      "status": "in_progress"
+      "status": "in_progress",
+      "images": [],
+      "contact": "微信：busy_wang",
+      "urgency": "medium",
+      "acceptor": "靠谱小李",
+      "completedAt": null,
+      "tags": [
+        "盖章",
+        "教务处",
+        "代办"
+      ]
     },
     {
       "id": 3,
@@ -677,7 +1369,16 @@
       "publisher": "手忙脚乱",
       "publishTime": "2026-06-28T14:00:00Z",
       "desc": "中通快递，取货码已发，送到北区5号楼楼下。",
-      "status": "open"
+      "status": "open",
+      "images": [],
+      "contact": "微信：busy_hands",
+      "urgency": "low",
+      "acceptor": null,
+      "completedAt": null,
+      "tags": [
+        "快递",
+        "代取"
+      ]
     },
     {
       "id": 4,
@@ -691,7 +1392,17 @@
       "publisher": "学生会",
       "publishTime": "2026-06-28T13:00:00Z",
       "desc": "一份学生会活动审批表，需要送到行政楼3楼办公室。",
-      "status": "done"
+      "status": "done",
+      "images": [],
+      "contact": "微信：student_union",
+      "urgency": "high",
+      "acceptor": "热心小张",
+      "completedAt": "2026-06-28T14:30:00Z",
+      "tags": [
+        "文件",
+        "代送",
+        "急"
+      ]
     },
     {
       "id": 5,
@@ -705,7 +1416,16 @@
       "publisher": "困倦的学姐",
       "publishTime": "2026-06-28T15:00:00Z",
       "desc": "中杯拿铁，不加糖，送到图书馆3楼。",
-      "status": "open"
+      "status": "open",
+      "images": [],
+      "contact": "微信：sleepy_senior",
+      "urgency": "medium",
+      "acceptor": null,
+      "completedAt": null,
+      "tags": [
+        "咖啡",
+        "代买"
+      ]
     },
     {
       "id": 6,
@@ -719,7 +1439,17 @@
       "publisher": "赶论文中",
       "publishTime": "2026-06-28T09:30:00Z",
       "desc": "PDF已发邮箱，双面打印+胶装，送到研究生1号楼。",
-      "status": "open"
+      "status": "open",
+      "images": [],
+      "contact": "微信：thesis_rush",
+      "urgency": "high",
+      "acceptor": null,
+      "completedAt": null,
+      "tags": [
+        "打印",
+        "论文",
+        "急"
+      ]
     },
     {
       "id": 7,
@@ -733,7 +1463,17 @@
       "publisher": "面包脑袋",
       "publishTime": "2026-06-28T20:00:00Z",
       "desc": "学校后门那家网红面包店，周末要排很久。帮我买两个牛角包+一个吐司。",
-      "status": "open"
+      "status": "open",
+      "images": [],
+      "contact": "微信：bread_lover",
+      "urgency": "low",
+      "acceptor": null,
+      "completedAt": null,
+      "tags": [
+        "面包",
+        "网红店",
+        "代买"
+      ]
     },
     {
       "id": 8,
@@ -747,7 +1487,17 @@
       "publisher": "忘了还书的小周",
       "publishTime": "2026-06-28T18:00:00Z",
       "desc": "3本书，已超期但不会罚钱（学生免费）。书在宿舍管理员那里，拿去还了就行。",
-      "status": "open"
+      "status": "open",
+      "images": [],
+      "contact": "QQ：222333444",
+      "urgency": "low",
+      "acceptor": null,
+      "completedAt": null,
+      "tags": [
+        "还书",
+        "图书馆",
+        "代办"
+      ]
     },
     {
       "id": 9,
@@ -761,7 +1511,17 @@
       "publisher": "加班科研狗",
       "publishTime": "2026-06-28T21:00:00Z",
       "desc": "一份炒面+一瓶冰可乐，送到实验楼B栋5楼。电梯到4楼，走一层到5楼。",
-      "status": "open"
+      "status": "open",
+      "images": [],
+      "contact": "微信：lab_dog",
+      "urgency": "medium",
+      "acceptor": null,
+      "completedAt": null,
+      "tags": [
+        "宵夜",
+        "代送",
+        "实验室"
+      ]
     },
     {
       "id": 10,
@@ -775,7 +1535,17 @@
       "publisher": "喝药的小林",
       "publishTime": "2026-06-28T16:00:00Z",
       "desc": "已经煎好的袋装中药，一共7袋，需要冷藏。拿到后请尽快送到。",
-      "status": "open"
+      "status": "open",
+      "images": [],
+      "contact": "微信：herbal_lin",
+      "urgency": "medium",
+      "acceptor": null,
+      "completedAt": null,
+      "tags": [
+        "中药",
+        "代取",
+        "医疗"
+      ]
     },
     {
       "id": 11,
@@ -789,7 +1559,16 @@
       "publisher": "生病的小郑",
       "publishTime": "2026-06-28T14:00:00Z",
       "desc": "一篇打印好的论文，帮我交到4楼张老师办公室。到了微信拍照确认。",
-      "status": "open"
+      "status": "open",
+      "images": [],
+      "contact": "微信：sick_zheng",
+      "urgency": "medium",
+      "acceptor": null,
+      "completedAt": null,
+      "tags": [
+        "交作业",
+        "代办"
+      ]
     },
     {
       "id": 12,
@@ -803,7 +1582,17 @@
       "publisher": "换宿舍的小王",
       "publishTime": "2026-06-27T12:00:00Z",
       "desc": "学校统一换寝，主要是一个行李箱+一个编织袋+一箱书。有电梯，大概半小时能搞定。",
-      "status": "in_progress"
+      "status": "in_progress",
+      "images": [],
+      "contact": "微信：moving_wang",
+      "urgency": "low",
+      "acceptor": "大力士阿强",
+      "completedAt": null,
+      "tags": [
+        "搬家",
+        "搬运",
+        "宿舍"
+      ]
     },
     {
       "id": 13,
@@ -817,7 +1606,17 @@
       "publisher": "留学生Tom",
       "publishTime": "2026-06-27T10:00:00Z",
       "desc": "买一个校徽钥匙扣+两本印有校名的笔记本。留学生宿舍1楼前台领取。",
-      "status": "open"
+      "status": "open",
+      "images": [],
+      "contact": "微信：tom_exchange",
+      "urgency": "low",
+      "acceptor": null,
+      "completedAt": null,
+      "tags": [
+        "文创",
+        "代购",
+        "纪念品"
+      ]
     },
     {
       "id": 14,
@@ -831,7 +1630,17 @@
       "publisher": "毕业生老张",
       "publishTime": "2026-06-26T10:00:00Z",
       "desc": "一箱衣服+几本书，已装好箱。帮忙搬到快递点寄个快递，快递费已提前付好了。",
-      "status": "done"
+      "status": "done",
+      "images": [],
+      "contact": "微信：grad_zhang",
+      "urgency": "medium",
+      "acceptor": "快递小助手",
+      "completedAt": "2026-06-26T16:00:00Z",
+      "tags": [
+        "寄快递",
+        "毕业",
+        "搬运"
+      ]
     }
   ],
   "messages": [

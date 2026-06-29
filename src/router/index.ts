@@ -15,9 +15,19 @@ const router = createRouter({
       component: () => import('../views/TradeView.vue'),
     },
     {
+      path: '/trade/:id',
+      name: 'TradeDetail',
+      component: () => import('../views/TradeDetailView.vue'),
+    },
+    {
       path: '/lost-found',
       name: 'LostFound',
       component: () => import('../views/LostFoundView.vue'),
+    },
+    {
+      path: '/lost-found/:id',
+      name: 'LostFoundDetail',
+      component: () => import('../views/LostFoundDetailView.vue'),
     },
     {
       path: '/group-buy',
@@ -25,9 +35,19 @@ const router = createRouter({
       component: () => import('../views/GroupBuyView.vue'),
     },
     {
+      path: '/group-buy/:id',
+      name: 'GroupBuyDetail',
+      component: () => import('../views/GroupBuyDetailView.vue'),
+    },
+    {
       path: '/errand',
       name: 'Errand',
       component: () => import('../views/ErrandView.vue'),
+    },
+    {
+      path: '/errand/:id',
+      name: 'ErrandDetail',
+      component: () => import('../views/ErrandDetailView.vue'),
     },
     {
       path: '/publish',
@@ -44,10 +64,10 @@ const router = createRouter({
       name: 'User',
       component: () => import('../views/UserCenterView.vue'),
     },
+    // 旧版通用详情页重定向到二手交易详情（向后兼容）
     {
       path: '/detail/:id?',
-      name: 'Detail',
-      component: () => import('../views/DetailView.vue'),
+      redirect: (to) => `/trade/${to.params.id || '1'}`,
     },
   ],
 })

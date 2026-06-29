@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { getGroupBuys, type GroupBuyItem } from '@/api/groupBuy'
 import ItemCard from '@/components/ItemCard.vue'
 import EmptyState from '@/components/EmptyState.vue'
+import { formatTime } from '@/utils/format'
 
+const router = useRouter()
 const items = ref<GroupBuyItem[]>([])
 const loading = ref(true)
 
@@ -17,6 +20,10 @@ onMounted(async () => {
     loading.value = false
   }
 })
+
+function goDetail(id: number) {
+  router.push(`/group-buy/${id}`)
+}
 
 function progressText(item: GroupBuyItem): string {
   return `${item.currentCount}/${item.targetCount}人`
@@ -37,14 +44,14 @@ function progressText(item: GroupBuyItem): string {
     />
 
     <div v-else class="item-list">
-      <div v-for="item in items" :key="item.id">
+      <div v-for="item in items" :key="item.id" @click="goDetail(item.id)">
         <ItemCard
           :title="item.title"
           :subtitle="item.desc"
           :tags="[item.category, '📍 ' + item.location]"
           :status="item.type"
           :highlight="item.price === '0' ? '免费' : '¥' + item.price + '/人'"
-          :footer="item.publisher + ' · ' + progressText(item)"
+          :footer="item.publisher + ' · ' + progressText(item) + ' · ' + formatTime(item.publishTime)"
         />
       </div>
     </div>

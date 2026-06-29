@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { getErrands, type ErrandItem } from '@/api/errand'
 import ItemCard from '@/components/ItemCard.vue'
 import EmptyState from '@/components/EmptyState.vue'
+import { formatTime, errandStatusLabel } from '@/utils/format'
 
+const router = useRouter()
 const items = ref<ErrandItem[]>([])
 const loading = ref(true)
 
@@ -18,13 +21,8 @@ onMounted(async () => {
   }
 })
 
-function statusLabel(status: string): string {
-  const map: Record<string, string> = {
-    open: '待接单',
-    in_progress: '进行中',
-    done: '已完成',
-  }
-  return map[status] || status
+function goDetail(id: number) {
+  router.push(`/errand/${id}`)
 }
 </script>
 
@@ -42,14 +40,14 @@ function statusLabel(status: string): string {
     />
 
     <div v-else class="item-list">
-      <div v-for="item in items" :key="item.id">
+      <div v-for="item in items" :key="item.id" @click="goDetail(item.id)">
         <ItemCard
           :title="item.title"
           :subtitle="item.desc"
           :tags="[item.taskType, item.from + ' → ' + item.to]"
           :status="item.status"
           :highlight="'¥' + item.reward"
-          :footer="item.publisher + ' · ' + statusLabel(item.status)"
+          :footer="item.publisher + ' · ' + errandStatusLabel(item.status) + ' · ' + formatTime(item.publishTime)"
         />
       </div>
     </div>

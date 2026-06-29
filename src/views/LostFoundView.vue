@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { getLostFounds, type LostFoundItem } from '@/api/lostFound'
 import ItemCard from '@/components/ItemCard.vue'
 import EmptyState from '@/components/EmptyState.vue'
+import { formatTime } from '@/utils/format'
 
+const router = useRouter()
 const items = ref<LostFoundItem[]>([])
 const loading = ref(true)
 
@@ -17,6 +20,10 @@ onMounted(async () => {
     loading.value = false
   }
 })
+
+function goDetail(id: number) {
+  router.push(`/lost-found/${id}`)
+}
 </script>
 
 <template>
@@ -33,7 +40,7 @@ onMounted(async () => {
     />
 
     <div v-else class="item-list">
-      <div v-for="item in items" :key="item.id">
+      <div v-for="item in items" :key="item.id" @click="goDetail(item.id)">
         <ItemCard
           :title="item.title"
           :subtitle="item.desc"
@@ -46,17 +53,6 @@ onMounted(async () => {
   </div>
 </template>
 
-<script lang="ts">
-function formatTime(dateStr: string) {
-  const d = new Date(dateStr)
-  const now = new Date()
-  const diff = now.getTime() - d.getTime()
-  const hours = Math.floor(diff / 3600000)
-  if (hours < 1) return '刚刚'
-  if (hours < 24) return hours + '小时前'
-  return Math.floor(hours / 24) + '天前'
-}
-</script>
 
 <style scoped>
 .page-title {

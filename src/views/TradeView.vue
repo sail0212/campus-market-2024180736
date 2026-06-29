@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { getTrades, type TradeItem } from '@/api/trade'
 import ItemCard from '@/components/ItemCard.vue'
 import EmptyState from '@/components/EmptyState.vue'
+import { formatTime } from '@/utils/format'
 
+const router = useRouter()
 const trades = ref<TradeItem[]>([])
 const loading = ref(true)
 
@@ -17,6 +20,10 @@ onMounted(async () => {
     loading.value = false
   }
 })
+
+function goDetail(id: number) {
+  router.push(`/trade/${id}`)
+}
 </script>
 
 <template>
@@ -33,14 +40,14 @@ onMounted(async () => {
     />
 
     <div v-else class="item-list">
-      <div v-for="item in trades" :key="item.id">
+      <div v-for="item in trades" :key="item.id" @click="goDetail(item.id)">
         <ItemCard
           :title="item.title"
           :subtitle="item.desc"
           :tags="[item.category, item.condition]"
           :status="item.status"
           :highlight="'¥' + item.price"
-          :footer="item.publisher + ' · ' + item.location"
+          :footer="item.publisher + ' · ' + formatTime(item.publishTime)"
         />
       </div>
     </div>
