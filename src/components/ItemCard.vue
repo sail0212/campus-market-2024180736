@@ -44,8 +44,8 @@ const statusLabels: Record<string, string> = {
 
 export default {
   computed: {
-    statusLabel() {
-      return statusLabels[this.status || ''] || this.status
+    statusLabel(): string {
+      return statusLabels[(this as any).status as string || ''] || (this as any).status as string || ''
     },
   },
 }

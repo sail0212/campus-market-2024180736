@@ -7,6 +7,7 @@ import { createTrade, updateTrade, getTradeById, type TradeFormData } from '@/ap
 import { createLostFound, updateLostFound, getLostFoundById, type LostFoundFormData } from '@/api/lostFound'
 import { createGroupBuy, updateGroupBuy, getGroupBuyById, type GroupBuyFormData } from '@/api/groupBuy'
 import { createErrand, updateErrand, getErrandById, type ErrandFormData } from '@/api/errand'
+import FormField from '@/components/FormField.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -111,7 +112,7 @@ function validate(): boolean {
 
   if (activeType.value === 'trade') {
     if (!tradeCategory.value) e.tradeCategory = '请选择分类'
-    if (!tradePrice.value || Number(tradePrice.value) < 0) e.tradePrice = '请输入有效价格'
+    if (!tradePrice.value || Number(tradePrice.value) <= 0) e.tradePrice = '价格必须大于 0'
     if (!tradeLocation.value.trim()) e.tradeLocation = '请输入交易地点'
   } else if (activeType.value === 'lostFound') {
     if (!lfCategory.value) e.lfCategory = '请选择分类'
@@ -127,7 +128,7 @@ function validate(): boolean {
   } else if (activeType.value === 'errand') {
     if (!erTaskType.value) e.erTaskType = '请选择任务类型'
     if (!erCategory.value) e.erCategory = '请选择分类'
-    if (!erReward.value || Number(erReward.value) <= 0) e.erReward = '请输入有效报酬'
+    if (erReward.value === '' || Number(erReward.value) < 0) e.erReward = '报酬不能为负数'
     if (!erFrom.value.trim()) e.erFrom = '请输入出发地'
     if (!erTo.value.trim()) e.erTo = '请输入目的地'
     if (!erDeadline.value) e.erDeadline = '请选择截止时间'
@@ -166,7 +167,6 @@ async function submit() {
         contact: contact.value,
         tags,
         specs: parseSpecs(tradeSpecsStr.value),
-        favorited: 0,
         tradeLocation: tradeLocation.value,
       }
       if (isEdit.value) {
@@ -266,7 +266,9 @@ function parseSpecs(str: string): Record<string, string> {
   str.split(/[,，\n]/).forEach((line) => {
     const parts = line.split(/[:：]/)
     if (parts.length === 2) {
-      specs[parts[0].trim()] = parts[1].trim()
+      const key = parts[0]!.trim()
+      const val = parts[1]!.trim()
+      if (key && val) specs[key] = val
     }
   })
   return specs
@@ -540,53 +542,41 @@ async function loadEditData() {
 
       <form class="publish-form" @submit.prevent="submit">
         <!-- === 通用字段 === -->
-        <div class="form-group">
-          <label>标题 <span class="required">*</span></label>
+        <FormField label="标题" required :error="errors.title">
           <input v-model="title" placeholder="请输入标题" maxlength="50" />
-          <span v-if="errors.title" class="field-error">{{ errors.title }}</span>
-        </div>
+        </FormField>
 
         <!-- === 二手交易专属 === -->
         <template v-if="activeType === 'trade'">
-          <div class="form-group">
-            <label>分类 <span class="required">*</span></label>
+          <FormField label="分类" required :error="errors.tradeCategory">
             <div class="cat-options">
               <label v-for="cat in tradeCategories" :key="cat" class="cat-radio">
                 <input type="radio" v-model="tradeCategory" :value="cat" />
                 <span>{{ cat }}</span>
               </label>
             </div>
-            <span v-if="errors.tradeCategory" class="field-error">{{ errors.tradeCategory }}</span>
-          </div>
+          </FormField>
           <div class="form-row">
-            <div class="form-group flex-2">
-              <label>售价 (¥) <span class="required">*</span></label>
+            <FormField label="售价 (¥)" required :error="errors.tradePrice" class="flex-2">
               <input v-model="tradePrice" type="number" placeholder="0" min="0" step="0.01" />
-              <span v-if="errors.tradePrice" class="field-error">{{ errors.tradePrice }}</span>
-            </div>
-            <div class="form-group flex-1">
-              <label>原价 (¥)</label>
+            </FormField>
+            <FormField label="原价 (¥)" class="flex-1">
               <input v-model="tradeOriginalPrice" type="number" placeholder="选填" min="0" step="0.01" />
-            </div>
+            </FormField>
           </div>
           <div class="form-row">
-            <div class="form-group flex-1">
-              <label>成色</label>
+            <FormField label="成色" class="flex-1">
               <select v-model="tradeCondition">
                 <option v-for="c in conditions" :key="c">{{ c }}</option>
               </select>
-            </div>
-            <div class="form-group flex-2">
-              <label>交易地点 <span class="required">*</span></label>
+            </FormField>
+            <FormField label="交易地点" required :error="errors.tradeLocation" class="flex-2">
               <input v-model="tradeLocation" placeholder="如：北区食堂门口" />
-              <span v-if="errors.tradeLocation" class="field-error">{{ errors.tradeLocation }}</span>
-            </div>
+            </FormField>
           </div>
-          <div class="form-group">
-            <label>规格参数</label>
+          <FormField label="规格参数" hint="用逗号或换行分隔，格式为 键:值">
             <textarea v-model="tradeSpecsStr" rows="3" placeholder="每行一个参数，格式：品牌:Apple&#10;型号:iPhone 15&#10;颜色:黑色" />
-            <span class="char-count">用逗号或换行分隔，格式为 键:值</span>
-          </div>
+          </FormField>
         </template>
 
         <!-- === 失物招领专属 === -->
@@ -603,46 +593,35 @@ async function loadEditData() {
             </div>
           </div>
           <div class="form-row">
-            <div class="form-group flex-1">
-              <label>物品名称 <span class="required">*</span></label>
+            <FormField label="物品名称" required :error="errors.lfItemName" class="flex-1">
               <input v-model="lfItemName" placeholder="如：钱包" />
-              <span v-if="errors.lfItemName" class="field-error">{{ errors.lfItemName }}</span>
-            </div>
-            <div class="form-group flex-1">
-              <label>分类 <span class="required">*</span></label>
+            </FormField>
+            <FormField label="分类" required :error="errors.lfCategory" class="flex-1">
               <select v-model="lfCategory">
                 <option value="">请选择</option>
                 <option v-for="c in lfCategories" :key="c" :value="c">{{ c }}</option>
               </select>
-              <span v-if="errors.lfCategory" class="field-error">{{ errors.lfCategory }}</span>
-            </div>
+            </FormField>
           </div>
           <div class="form-row">
-            <div class="form-group flex-1">
-              <label>地点 <span class="required">*</span></label>
+            <FormField label="地点" required :error="errors.lfLocation" class="flex-1">
               <input v-model="lfLocation" placeholder="如：图书馆二楼" />
-              <span v-if="errors.lfLocation" class="field-error">{{ errors.lfLocation }}</span>
-            </div>
-            <div class="form-group flex-1">
-              <label>时间 <span class="required">*</span></label>
+            </FormField>
+            <FormField label="时间" required :error="errors.lfEventTime" class="flex-1">
               <input v-model="lfEventTime" type="datetime-local" />
-              <span v-if="errors.lfEventTime" class="field-error">{{ errors.lfEventTime }}</span>
-            </div>
+            </FormField>
           </div>
           <div class="form-row">
-            <div class="form-group flex-1">
-              <label>联系电话</label>
+            <FormField label="联系电话" class="flex-1">
               <input v-model="lfContactPhone" placeholder="选填" />
-            </div>
-            <div class="form-group flex-1">
-              <label>悬赏金额 (¥)</label>
+            </FormField>
+            <FormField label="悬赏金额 (¥)" class="flex-1">
               <input v-model="lfReward" type="number" placeholder="选填" min="0" />
-            </div>
+            </FormField>
           </div>
-          <div class="form-group">
-            <label>认领/存放地点</label>
+          <FormField label="认领/存放地点">
             <input v-model="lfClaimLocation" placeholder="如：图书馆服务台" />
-          </div>
+          </FormField>
         </template>
 
         <!-- === 拼单搭子专属 === -->
@@ -656,119 +635,88 @@ async function loadEditData() {
             </div>
           </div>
           <div class="form-row">
-            <div class="form-group flex-1">
-              <label>分类 <span class="required">*</span></label>
+            <FormField label="分类" required :error="errors.gbCategory" class="flex-1">
               <select v-model="gbCategory">
                 <option value="">请选择</option>
                 <option v-for="c in gbCategories" :key="c" :value="c">{{ c }}</option>
               </select>
-              <span v-if="errors.gbCategory" class="field-error">{{ errors.gbCategory }}</span>
-            </div>
-            <div class="form-group flex-1">
-              <label>人均价格 (¥) <span class="required">*</span></label>
+            </FormField>
+            <FormField label="人均价格 (¥)" required :error="errors.gbPrice" class="flex-1">
               <input v-model="gbPrice" type="number" placeholder="免费填0" min="0" step="0.01" />
-              <span v-if="errors.gbPrice" class="field-error">{{ errors.gbPrice }}</span>
-            </div>
+            </FormField>
           </div>
           <div class="form-row">
-            <div class="form-group flex-1">
-              <label>目标人数 <span class="required">*</span></label>
+            <FormField label="目标人数" required :error="errors.gbTargetCount" class="flex-1">
               <input v-model="gbTargetCount" type="number" placeholder="至少2人" min="2" />
-              <span v-if="errors.gbTargetCount" class="field-error">{{ errors.gbTargetCount }}</span>
-            </div>
-            <div class="form-group flex-1">
-              <label>截止时间 <span class="required">*</span></label>
+            </FormField>
+            <FormField label="截止时间" required :error="errors.gbDeadline" class="flex-1">
               <input v-model="gbDeadline" type="datetime-local" />
-              <span v-if="errors.gbDeadline" class="field-error">{{ errors.gbDeadline }}</span>
-            </div>
+            </FormField>
           </div>
-          <div class="form-group">
-            <label>地点 <span class="required">*</span></label>
+          <FormField label="地点" required :error="errors.gbLocation">
             <input v-model="gbLocation" placeholder="如：校门口集合" />
-            <span v-if="errors.gbLocation" class="field-error">{{ errors.gbLocation }}</span>
-          </div>
-          <div class="form-group">
-            <label>加入要求</label>
+          </FormField>
+          <FormField label="加入要求">
             <textarea v-model="gbRequirements" rows="2" placeholder="说明加入条件或要求（选填）" maxlength="300" />
-          </div>
+          </FormField>
         </template>
 
         <!-- === 跑腿委托专属 === -->
         <template v-if="activeType === 'errand'">
           <div class="form-row">
-            <div class="form-group flex-1">
-              <label>任务类型 <span class="required">*</span></label>
+            <FormField label="任务类型" required :error="errors.erTaskType" class="flex-1">
               <select v-model="erTaskType">
                 <option value="">请选择</option>
                 <option v-for="t in erTaskTypes" :key="t" :value="t">{{ t }}</option>
               </select>
-              <span v-if="errors.erTaskType" class="field-error">{{ errors.erTaskType }}</span>
-            </div>
-            <div class="form-group flex-1">
-              <label>分类 <span class="required">*</span></label>
+            </FormField>
+            <FormField label="分类" required :error="errors.erCategory" class="flex-1">
               <select v-model="erCategory">
                 <option value="">请选择</option>
                 <option v-for="c in erCategories" :key="c" :value="c">{{ c }}</option>
               </select>
-              <span v-if="errors.erCategory" class="field-error">{{ errors.erCategory }}</span>
-            </div>
+            </FormField>
           </div>
           <div class="form-row">
-            <div class="form-group flex-1">
-              <label>报酬 (¥) <span class="required">*</span></label>
+            <FormField label="报酬 (¥)" required :error="errors.erReward" class="flex-1">
               <input v-model="erReward" type="number" placeholder="0" min="0" step="0.01" />
-              <span v-if="errors.erReward" class="field-error">{{ errors.erReward }}</span>
-            </div>
-            <div class="form-group flex-1">
-              <label>紧急程度</label>
+            </FormField>
+            <FormField label="紧急程度" class="flex-1">
               <select v-model="erUrgency">
                 <option value="low">不急</option>
                 <option value="medium">一般</option>
                 <option value="high">紧急</option>
               </select>
-            </div>
+            </FormField>
           </div>
           <div class="form-row">
-            <div class="form-group flex-1">
-              <label>出发地 <span class="required">*</span></label>
+            <FormField label="出发地" required :error="errors.erFrom" class="flex-1">
               <input v-model="erFrom" placeholder="如：北区食堂" />
-              <span v-if="errors.erFrom" class="field-error">{{ errors.erFrom }}</span>
-            </div>
-            <div class="form-group flex-1">
-              <label>目的地 <span class="required">*</span></label>
+            </FormField>
+            <FormField label="目的地" required :error="errors.erTo" class="flex-1">
               <input v-model="erTo" placeholder="如：南区宿舍3号楼" />
-              <span v-if="errors.erTo" class="field-error">{{ errors.erTo }}</span>
-            </div>
+            </FormField>
           </div>
-          <div class="form-group">
-            <label>截止时间 <span class="required">*</span></label>
+          <FormField label="截止时间" required :error="errors.erDeadline">
             <input v-model="erDeadline" type="datetime-local" />
-            <span v-if="errors.erDeadline" class="field-error">{{ errors.erDeadline }}</span>
-          </div>
+          </FormField>
         </template>
 
         <!-- === 通用字段继续 === -->
-        <div class="form-group">
-          <label>描述 <span class="required">*</span></label>
+        <FormField label="描述" required :error="errors.desc" :hint="desc.length + '/500'">
           <textarea v-model="desc" rows="4" placeholder="详细描述内容…" maxlength="500" />
-          <span class="char-count">{{ desc.length }}/500</span>
-          <span v-if="errors.desc" class="field-error">{{ errors.desc }}</span>
-        </div>
+        </FormField>
 
-        <div class="form-group">
-          <label>联系方式 <span class="required">*</span></label>
+        <FormField label="联系方式" required :error="errors.contact">
           <input v-model="contact" placeholder="微信/QQ号等" maxlength="50" />
-          <span v-if="errors.contact" class="field-error">{{ errors.contact }}</span>
-        </div>
+        </FormField>
 
-        <div class="form-group">
-          <label>标签</label>
+        <FormField label="标签">
           <input v-model="tagsStr" placeholder="用逗号分隔，如：考研, 数学, 教材" maxlength="100" />
-        </div>
+        </FormField>
 
         <!-- 图片上传 -->
-        <div class="form-group">
-          <label>图片（最多9张）</label>
+        <FormField label="图片（最多9张）">
           <div class="image-upload-section">
             <div v-for="(img, idx) in imagePreviews" :key="idx" class="preview-thumb">
               <img :src="img" alt="预览" />
@@ -780,7 +728,7 @@ async function loadEditData() {
               <span class="upload-text">点击上传</span>
             </label>
           </div>
-        </div>
+        </FormField>
 
         <!-- 操作按钮 -->
         <div class="form-actions">
