@@ -6,6 +6,7 @@ defineProps<{
   status?: string
   highlight?: string
   footer?: string
+  favorited?: boolean
 }>()
 </script>
 
@@ -23,6 +24,13 @@ defineProps<{
       <div class="card-bottom">
         <span v-if="highlight" class="card-highlight">{{ highlight }}</span>
         <span v-if="footer" class="card-footer">{{ footer }}</span>
+      </div>
+      <!-- 操作按钮插槽（收藏等） -->
+      <div v-if="favorited !== undefined || $slots.actions" class="card-actions">
+        <span v-if="favorited !== undefined" class="fav-indicator" :class="{ active: favorited }">
+          {{ favorited ? '❤️' : '🤍' }}
+        </span>
+        <slot name="actions" />
       </div>
     </div>
   </div>
@@ -156,5 +164,26 @@ export default {
 .card-footer {
   font-size: 12px;
   color: #909399;
+}
+
+.card-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-top: 8px;
+  margin-top: 8px;
+  border-top: 1px solid #f0f0f0;
+}
+.fav-indicator {
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.15s;
+  user-select: none;
+}
+.fav-indicator:hover {
+  transform: scale(1.2);
+}
+.fav-indicator.active {
+  filter: none;
 }
 </style>

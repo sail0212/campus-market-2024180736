@@ -7,42 +7,120 @@ const messages = store.messages
 
 <template>
   <div class="message-view">
-    <h2 class="page-title">消息</h2>
+    <div class="page-header">
+      <h2 class="page-title">消息中心</h2>
+      <p class="page-desc">查看系统通知、收藏提醒和互动消息</p>
+    </div>
 
-    <div v-if="messages.length > 0" class="msg-list">
-      <div
-        v-for="msg in messages"
-        :key="msg.id"
-        class="msg-item"
-      >
-        <span class="msg-avatar">👤</span>
-        <div class="msg-body">
-          <div class="msg-top">
-            <span class="msg-name">{{ msg.from }}</span>
-            <span class="msg-time">{{ msg.time }}</span>
-          </div>
-          <div class="msg-bottom">
-            <span class="msg-preview">{{ msg.lastMsg }}</span>
-            <span v-if="msg.unread > 0" class="msg-badge">{{ msg.unread }}</span>
-          </div>
-        </div>
+    <!-- 系统通知区域 -->
+    <div class="notice-section">
+      <h3 class="section-title">📢 系统通知</h3>
+      <div class="notice-card card">
+        <article class="notice-item">
+          <h4>欢迎使用校园轻集市</h4>
+          <p>你可以在这里发布二手商品、失物招领、拼单搭子和跑腿委托。</p>
+          <span class="notice-time">刚刚</span>
+        </article>
+        <article class="notice-item">
+          <h4>功能提示</h4>
+          <p>收藏的信息可以在个人中心中查看，记得常来看看哦～</p>
+          <span class="notice-time">1天前</span>
+        </article>
+        <article class="notice-item">
+          <h4>安全提醒</h4>
+          <p>线下交易请注意人身和财产安全，建议选择校内公共场所进行当面交易。</p>
+          <span class="notice-time">3天前</span>
+        </article>
       </div>
     </div>
 
-    <div v-else class="empty">
-      <p class="empty-icon">📭</p>
-      <p>暂无消息</p>
+    <!-- 互动消息 -->
+    <div class="chat-section">
+      <h3 class="section-title">💬 互动消息</h3>
+
+      <div v-if="messages.length > 0" class="msg-list">
+        <div
+          v-for="msg in messages"
+          :key="msg.id"
+          class="msg-item"
+        >
+          <span class="msg-avatar">👤</span>
+          <div class="msg-body">
+            <div class="msg-top">
+              <span class="msg-name">{{ msg.from }}</span>
+              <span class="msg-time">{{ msg.time }}</span>
+            </div>
+            <div class="msg-bottom">
+              <span class="msg-preview">{{ msg.lastMsg }}</span>
+              <span v-if="msg.unread > 0" class="msg-badge">{{ msg.unread }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div v-else class="empty">
+        <p class="empty-icon">📭</p>
+        <p>暂无消息</p>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+.page-header {
+  margin-bottom: 20px;
+}
 .page-title {
   font-size: var(--font-xl);
   font-weight: 600;
-  margin-bottom: 16px;
+  margin-bottom: 4px;
+}
+.page-desc {
+  font-size: var(--font-sm);
+  color: var(--color-text-light);
 }
 
+.section-title {
+  font-size: var(--font-md);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* ===== 系统通知 ===== */
+.notice-section {
+  margin-bottom: 24px;
+}
+.notice-card {
+  display: flex;
+  flex-direction: column;
+}
+.notice-item {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-border-light);
+  position: relative;
+}
+.notice-item:last-child {
+  border-bottom: none;
+}
+.notice-item h4 {
+  font-size: var(--font-sm);
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.notice-item p {
+  font-size: var(--font-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+.notice-time {
+  font-size: var(--font-xs);
+  color: var(--color-text-light);
+}
+
+/* ===== 互动消息 ===== */
+.chat-section {
+  margin-bottom: 24px;
+}
 .msg-list {
   display: flex;
   flex-direction: column;
@@ -51,9 +129,15 @@ const messages = store.messages
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--color-border-light);
+  padding: 14px 16px;
+  background: var(--color-card);
+  border-radius: var(--radius-sm);
+  margin-bottom: 2px;
   cursor: pointer;
+  transition: background 0.15s;
+}
+.msg-item:hover {
+  background: #fafafa;
 }
 .msg-avatar {
   font-size: 40px;
@@ -103,7 +187,7 @@ const messages = store.messages
 
 .empty {
   text-align: center;
-  padding: 80px 0;
+  padding: 60px 0;
   color: var(--color-text-light);
 }
 .empty-icon {

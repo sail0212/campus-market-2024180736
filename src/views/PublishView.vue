@@ -8,7 +8,9 @@ import { createLostFound, updateLostFound, getLostFoundById, type LostFoundFormD
 import { createGroupBuy, updateGroupBuy, getGroupBuyById, type GroupBuyFormData } from '@/api/groupBuy'
 import { createErrand, updateErrand, getErrandById, type ErrandFormData } from '@/api/errand'
 import FormField from '@/components/FormField.vue'
+import { useUserStore } from '@/stores/user'
 
+const userStore = useUserStore()
 const route = useRoute()
 const router = useRouter()
 
@@ -158,7 +160,7 @@ async function submit() {
         originalPrice: tradeOriginalPrice.value ? Number(tradeOriginalPrice.value) : undefined,
         category: tradeCategory.value,
         condition: tradeCondition.value,
-        publisher: '小明',
+        publisher: userStore.user.name,
         location: tradeLocation.value,
         image: '',
         images: imagePreviews.value,
@@ -175,6 +177,7 @@ async function submit() {
         await createTrade(data)
       }
       successMsg.value = isEdit.value ? '编辑成功！' : '发布成功！'
+      userStore.incrementPublished()
       setTimeout(() => router.push(PUBLISH_TYPE_ROUTES.trade), 1200)
     } else if (activeType.value === 'lostFound') {
       const data: LostFoundFormData = {
@@ -191,7 +194,7 @@ async function submit() {
         images: imagePreviews.value,
         reward: lfReward.value ? Number(lfReward.value) : undefined,
         claimLocation: lfClaimLocation.value || lfLocation.value,
-        finder: lfType.value === 'found' ? '小明' : undefined,
+        finder: lfType.value === 'found' ? userStore.user.name : undefined,
         tags,
       }
       if (isEdit.value) {
@@ -200,6 +203,7 @@ async function submit() {
         await createLostFound(data)
       }
       successMsg.value = isEdit.value ? '编辑成功！' : '发布成功！'
+      userStore.incrementPublished()
       setTimeout(() => router.push(PUBLISH_TYPE_ROUTES.lostFound), 1200)
     } else if (activeType.value === 'groupBuy') {
       const data: GroupBuyFormData = {
@@ -209,7 +213,7 @@ async function submit() {
         targetCount: Number(gbTargetCount.value),
         deadline: gbDeadline.value || now,
         location: gbLocation.value,
-        publisher: '小明',
+        publisher: userStore.user.name,
         price: gbPrice.value || '0',
         desc: desc.value,
         status: 'open',
@@ -224,6 +228,7 @@ async function submit() {
         await createGroupBuy(data)
       }
       successMsg.value = isEdit.value ? '编辑成功！' : '发布成功！'
+      userStore.incrementPublished()
       setTimeout(() => router.push(PUBLISH_TYPE_ROUTES.groupBuy), 1200)
     } else if (activeType.value === 'errand') {
       const data: ErrandFormData = {
@@ -234,7 +239,7 @@ async function submit() {
         from: erFrom.value,
         to: erTo.value,
         deadline: erDeadline.value || now,
-        publisher: '小明',
+        publisher: userStore.user.name,
         desc: desc.value,
         status: 'open',
         images: imagePreviews.value,
@@ -248,6 +253,7 @@ async function submit() {
         await createErrand(data)
       }
       successMsg.value = isEdit.value ? '编辑成功！' : '发布成功！'
+      userStore.incrementPublished()
       setTimeout(() => router.push(PUBLISH_TYPE_ROUTES.errand), 1200)
     }
 

@@ -2,6 +2,7 @@
 defineProps<{
   text: string
   icon?: string
+  hint?: string
 }>()
 </script>
 
@@ -9,6 +10,7 @@ defineProps<{
   <div class="empty-state">
     <span v-if="icon" class="empty-icon">{{ icon }}</span>
     <p>{{ text }}</p>
+    <p v-if="hint" class="empty-hint">{{ hint }}</p>
   </div>
 </template>
 
@@ -31,5 +33,9 @@ defineProps<{
 }
 .empty-state p {
   font-size: 14px;
+}
+.empty-hint {
+  font-size: 12px !important;
+  color: #b0b3bb;
 }
 </style>

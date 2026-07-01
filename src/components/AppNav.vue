@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useUserStore } from '@/stores/user'
+
+const userStore = useUserStore()
+</script>
 
 <template>
   <nav class="app-nav">
@@ -11,7 +15,10 @@
         <router-link to="/errand">跑腿委托</router-link>
         <router-link to="/publish" class="nav-publish">发布</router-link>
         <router-link to="/message">消息</router-link>
-        <router-link to="/user">我的</router-link>
+        <router-link to="/user" class="nav-user">
+          <span class="user-avatar">👤</span>
+          <span>{{ userStore.displayName }}</span>
+        </router-link>
       </div>
     </div>
   </nav>
@@ -71,5 +78,13 @@
 }
 .nav-publish:hover {
   background: #06ad56 !important;
+}
+.nav-user {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.user-avatar {
+  font-size: 16px;
 }
 </style>
