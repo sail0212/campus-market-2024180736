@@ -2,220 +2,203 @@
 import { ref, onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { getGroupBuyById, deleteGroupBuy, type GroupBuyItem } from '@/api/groupBuy'
+import { getComments, createComment, type CommentItem } from '@/api/comment'
 import { useFavoriteStore } from '@/stores/favorite'
+import { useUserStore } from '@/stores/user'
 import { formatTime, formatDateTime, statusLabel, deadlineRemaining } from '@/utils/format'
 
 const route = useRoute()
 const router = useRouter()
 const favoriteStore = useFavoriteStore()
+const userStore = useUserStore()
 
 const item = ref<GroupBuyItem | null>(null)
 const loading = ref(true)
 const showDeleteConfirm = ref(false)
+const showContact = ref(false)
+const showJoinToast = ref(false)
+const currentImageIdx = ref(0)
+
+// Comments
+const comments = ref<CommentItem[]>([])
+const newComment = ref('')
+const submittingComment = ref(false)
 
 const id = computed(() => Number(route.params.id))
 
 onMounted(async () => {
   try {
-    const res = await getGroupBuyById(id.value)
+    const [res, commentRes] = await Promise.all([
+      getGroupBuyById(id.value),
+      getComments('groupBuy', id.value),
+    ])
     item.value = res.data
-  } catch (e) {
-    console.error('获取拼单详情失败', e)
-  } finally {
-    loading.value = false
-  }
+    comments.value = commentRes.data
+  } catch (e) { console.error('获取拼单详情失败', e) }
+  finally { loading.value = false }
 })
 
-function goBack() { router.back() }
-
-function goEdit() {
-  if (item.value) {
-    router.push({ path: '/publish', query: { type: 'groupBuy', edit: String(item.value.id) } })
-  }
+function prevImage() {
+  if (!item.value || item.value.images.length === 0) return
+  currentImageIdx.value = (currentImageIdx.value - 1 + item.value.images.length) % item.value.images.length
+}
+function nextImage() {
+  if (!item.value || item.value.images.length === 0) return
+  currentImageIdx.value = (currentImageIdx.value + 1) % item.value.images.length
 }
 
+async function submitComment() {
+  if (!newComment.value.trim() || !item.value) return
+  submittingComment.value = true
+  try {
+    const res = await createComment({
+      itemType: 'groupBuy', itemId: item.value.id,
+      author: userStore.user.name || '匿名用户', content: newComment.value.trim(),
+    })
+    comments.value.push(res.data)
+    newComment.value = ''
+  } catch (e) { console.error('评论失败', e) }
+  finally { submittingComment.value = false }
+}
+
+function goBack() { router.back() }
+function goEdit() {
+  if (item.value) router.push({ path: '/publish', query: { type: 'groupBuy', edit: String(item.value.id) } })
+}
 async function handleDelete() {
   if (!item.value) return
-  try {
-    await deleteGroupBuy(item.value.id)
-    router.push('/group-buy')
-  } catch (e) {
-    console.error('删除失败', e)
-    alert('删除失败，请重试')
+  try { await deleteGroupBuy(item.value.id); router.push('/group-buy') }
+  catch (e) { console.error('删除失败', e); alert('删除失败，请重试') }
+}
+
+function handleJoin() {
+  if (!item.value || item.value.status !== 'open') return
+  item.value.currentCount++
+  if (item.value.currentCount >= item.value.targetCount) {
+    item.value.status = 'closed'
   }
+  showJoinToast.value = true
+  setTimeout(() => { showJoinToast.value = false }, 2000)
 }
 
 const progress = computed(() => {
   if (!item.value) return 0
   return Math.round((item.value.currentCount / item.value.targetCount) * 100)
 })
-
 const remaining = computed(() => {
   if (!item.value) return { text: '', expired: false }
   return deadlineRemaining(item.value.deadline)
 })
-
-const typeIcon = computed(() => {
-  const map: Record<string, string> = { ping: '🛒', dazi: '🤝', team: '👥' }
-  return map[item.value?.type || ''] || '📌'
-})
-
-const typeName = computed(() => {
-  const map: Record<string, string> = { ping: '拼单', dazi: '搭子', team: '组队' }
-  return map[item.value?.type || ''] || '拼单'
-})
-
+const typeIcon = computed(() => ({ ping: '🛒', dazi: '🤝', team: '👥' } as Record<string,string>)[item.value?.type || ''] || '📌')
+const typeName = computed(() => ({ ping: '拼单', dazi: '搭子', team: '组队' } as Record<string,string>)[item.value?.type || ''] || '拼单')
 const isFav = computed(() => item.value ? favoriteStore.isFavorited(item.value.id, 'groupBuy') : false)
-
-function toggleFav() {
-  if (item.value) {
-    favoriteStore.toggleFavorite(item.value.id, 'groupBuy', item.value.title)
-  }
-}
+function toggleFav() { if (item.value) favoriteStore.toggleFavorite(item.value.id, 'groupBuy', item.value.title) }
+const creditScore = computed(() => +(Math.min(5.0, (item.value?.publisher || '').length * 0.25 + 4.0)).toFixed(1))
 </script>
 
 <template>
   <div class="detail-view">
     <div v-if="loading" class="loading-state">加载中…</div>
-
     <template v-else-if="item">
-      <!-- 头部 -->
+      <!-- 头部/图片 -->
       <div class="header-area" :class="item.type">
         <button class="back-btn" @click="goBack">← 返回</button>
-        <span class="header-icon">{{ typeIcon }}</span>
-        <span class="header-type">{{ typeName }}</span>
+        <button class="share-btn" title="分享">🔗</button>
+        <template v-if="item.images.length > 0">
+          <div class="carousel">
+            <button v-if="item.images.length > 1" class="carousel-btn prev" @click.stop="prevImage">‹</button>
+            <img :src="item.images[currentImageIdx]" :alt="item.title" class="carousel-img" />
+            <button v-if="item.images.length > 1" class="carousel-btn next" @click.stop="nextImage">›</button>
+          </div>
+          <div class="carousel-dots" v-if="item.images.length > 1"><span v-for="(img,i) in item.images" :key="i" class="dot" :class="{active:i===currentImageIdx}" @click="currentImageIdx=i"></span></div>
+          <span class="img-count">{{ currentImageIdx + 1 }}/{{ item.images.length }}</span>
+        </template>
+        <template v-else>
+          <span class="header-icon">{{ typeIcon }}</span>
+          <span class="header-type">{{ typeName }}</span>
+        </template>
       </div>
 
-      <!-- 基本信息 -->
+      <!-- 基本信息 + 进度 -->
       <div class="info-section card">
-        <div class="title-row">
-          <h1 class="title">{{ item.title }}</h1>
-          <span class="status-badge" :class="item.status">{{ statusLabel(item.status) }}</span>
-        </div>
-
-        <!-- 进度条 -->
+        <div class="title-row"><h1 class="title">{{ item.title }}</h1><span class="status-badge" :class="item.status">{{ statusLabel(item.status) }}</span></div>
         <div class="progress-section">
-          <div class="progress-bar">
-            <div class="progress-fill" :style="{ width: progress + '%' }"></div>
-          </div>
-          <div class="progress-info">
-            <span class="progress-text">{{ item.currentCount }}/{{ item.targetCount }} 人</span>
-            <span class="progress-desc" v-if="item.status === 'open'">
-              还差 {{ item.targetCount - item.currentCount }} 人
-            </span>
-            <span class="progress-desc closed" v-else>已结束</span>
-          </div>
+          <div class="progress-bar"><div class="progress-fill" :style="{ width: progress + '%' }"></div></div>
+          <div class="progress-info"><span class="progress-text">{{ item.currentCount }}/{{ item.targetCount }} 人</span><span class="progress-desc" v-if="item.status === 'open'">还差 {{ item.targetCount - item.currentCount }} 人</span><span class="progress-desc closed" v-else>已结束</span></div>
         </div>
-
-        <!-- 小信息 -->
         <div class="meta-grid">
-          <div class="meta-item">
-            <span class="meta-label">💰 人均</span>
-            <span class="meta-value price">{{ item.price === '0' ? '免费' : '¥' + item.price }}</span>
-          </div>
-          <div class="meta-item">
-            <span class="meta-label">📍 地点</span>
-            <span class="meta-value">{{ item.location }}</span>
-          </div>
-          <div class="meta-item">
-            <span class="meta-label">⏰ 截止</span>
-            <span class="meta-value" :class="{ expired: remaining.expired }">
-              {{ remaining.text }}
-            </span>
-          </div>
-          <div class="meta-item">
-            <span class="meta-label">📅 发布</span>
-            <span class="meta-value">{{ formatTime(item.publishTime) }}</span>
-          </div>
+          <div class="meta-item"><span class="meta-label">💰 人均</span><span class="meta-value price">{{ item.price === '0' ? '免费' : '¥' + item.price }}</span></div>
+          <div class="meta-item"><span class="meta-label">📍 地点</span><span class="meta-value">{{ item.location }}</span></div>
+          <div class="meta-item"><span class="meta-label">⏰ 截止</span><span class="meta-value" :class="{ expired: remaining.expired }">{{ remaining.text }}</span></div>
+          <div class="meta-item"><span class="meta-label">📅 发布</span><span class="meta-value">{{ formatTime(item.publishTime) }}</span></div>
         </div>
       </div>
 
       <!-- 标签 -->
-      <div v-if="item.tags.length > 0" class="tags-section card">
-        <div class="tags-row">
-          <span v-for="tag in item.tags" :key="tag" class="tag">{{ tag }}</span>
-        </div>
-      </div>
+      <div v-if="item.tags.length > 0" class="tags-section card"><div class="tags-row"><span v-for="tag in item.tags" :key="tag" class="tag">{{ tag }}</span></div></div>
 
-      <!-- 活动描述 -->
-      <div class="desc-section card">
-        <h3>活动详情</h3>
-        <p class="desc-text">{{ item.desc }}</p>
-      </div>
+      <!-- 描述 + 要求 -->
+      <div class="desc-section card"><h3>活动详情</h3><p class="desc-text">{{ item.desc }}</p></div>
+      <div v-if="item.requirements" class="requirements-section card"><h3>加入要求</h3><p class="req-text">{{ item.requirements }}</p></div>
 
-      <!-- 加入要求 -->
-      <div v-if="item.requirements" class="requirements-section card">
-        <h3>加入要求</h3>
-        <p class="req-text">{{ item.requirements }}</p>
-      </div>
-
-      <!-- 发起人&联系方式 -->
-      <div class="contact-section card">
+      <!-- 发起人 -->
+      <div class="seller-section card">
         <h3>发起信息</h3>
-        <div class="info-grid">
-          <div class="info-item">
-            <span class="info-label">发起人</span>
-            <span class="info-value">👤 {{ item.publisher }}</span>
-          </div>
-          <div class="info-item">
-            <span class="info-label">联系方式</span>
-            <span class="info-value">📞 {{ item.contact }}</span>
-          </div>
-          <div class="info-item">
-            <span class="info-label">发布时间</span>
-            <span class="info-value">{{ formatDateTime(item.publishTime) }}</span>
-          </div>
-          <div class="info-item">
-            <span class="info-label">更新时间</span>
-            <span class="info-value">{{ formatDateTime(item.updatedAt) }}</span>
+        <div class="seller-info">
+          <span class="avatar">👤</span>
+          <div class="seller-meta">
+            <div class="seller-name-row"><span class="seller-name">{{ item.publisher }}</span><span class="credit-badge">⭐ {{ creditScore }}</span></div>
+            <span class="seller-contact">📞 {{ item.contact }}</span>
+            <span class="seller-rate">发起时间 {{ formatTime(item.publishTime) }}</span>
           </div>
         </div>
       </div>
 
-      <!-- 参与成员 -->
+      <!-- 参与者 -->
       <div v-if="item.participants.length > 0" class="participants-section card">
         <h3>参与成员 ({{ item.participants.length }})</h3>
         <div class="participant-list">
           <div v-for="p in item.participants" :key="p.name" class="participant-item">
-            <span class="p-avatar">👤</span>
-            <span class="p-name">{{ p.name }}</span>
-            <span class="p-time">{{ formatTime(p.joinedAt) }}加入</span>
+            <span class="p-avatar">👤</span><span class="p-name">{{ p.name }}</span><span class="p-time">{{ formatTime(p.joinedAt) }}加入</span>
           </div>
         </div>
+      </div>
+
+      <!-- 留言 -->
+      <div class="comments-section card">
+        <h3>活动讨论 ({{ comments.length }})</h3>
+        <div v-if="comments.length > 0" class="comment-list">
+          <div v-for="c in comments" :key="c.id" class="comment-item">
+            <span class="comment-avatar">👤</span>
+            <div class="comment-body"><div class="comment-top"><span class="comment-author">{{ c.author }}</span><span class="comment-time">{{ formatTime(c.time) }}</span></div><p class="comment-content">{{ c.content }}</p></div>
+          </div>
+        </div>
+        <div v-else class="no-comments">暂无讨论，快来发言吧~</div>
+        <div class="comment-form"><input v-model="newComment" placeholder="写下你想说的话…" maxlength="200" @keyup.enter="submitComment" /><button class="comment-submit" :disabled="!newComment.trim() || submittingComment" @click="submitComment">{{ submittingComment ? '发送中' : '发送' }}</button></div>
       </div>
 
       <!-- 管理 -->
-      <div class="manage-section card">
-        <button class="btn-edit" @click="goEdit">✏️ 编辑活动</button>
-        <button class="btn-delete" @click="showDeleteConfirm = true">🗑️ 取消活动</button>
-      </div>
+      <div class="manage-section card"><button class="btn-edit" @click="goEdit">✏️ 编辑活动</button><button class="btn-delete" @click="showDeleteConfirm = true">🗑️ 取消活动</button></div>
+      <div class="report-section"><span class="report-link">⚠️ 举报此活动</span></div>
 
-      <!-- 删除确认 -->
-      <div v-if="showDeleteConfirm" class="confirm-overlay" @click.self="showDeleteConfirm = false">
-        <div class="confirm-card">
-          <p class="confirm-title">确认取消？</p>
-          <p class="confirm-text">取消后活动将不再展示，已有参与者将收到通知。</p>
-          <div class="confirm-actions">
-            <button class="btn-cancel" @click="showDeleteConfirm = false">再想想</button>
-            <button class="btn-danger" @click="handleDelete">确认取消</button>
-          </div>
-        </div>
-      </div>
+      <!-- 弹窗 -->
+      <div v-if="showDeleteConfirm" class="confirm-overlay" @click.self="showDeleteConfirm = false"><div class="confirm-card"><p class="confirm-title">确认取消？</p><p class="confirm-text">取消后活动将不再展示。</p><div class="confirm-actions"><button class="btn-cancel" @click="showDeleteConfirm = false">再想想</button><button class="btn-danger" @click="handleDelete">确认取消</button></div></div></div>
 
+      <!-- 联系弹窗 -->
+      <div v-if="showContact" class="confirm-overlay" @click.self="showContact = false"><div class="contact-modal"><p class="contact-modal-title">📞 联系发起人</p><div class="contact-info-card"><div class="contact-row"><span class="contact-label">发起人</span><span class="contact-value">{{ item.publisher }}</span></div><div class="contact-row"><span class="contact-label">联系方式</span><span class="contact-value contact-highlight">{{ item.contact }}</span></div></div><p class="contact-tip">💡 参与活动前建议先沟通确认细节</p><button class="btn-primary" style="width:100%;margin-top:12px" @click="showContact = false">知道了</button></div></div>
+
+      <!-- 加入成功提示 -->
+      <div v-if="showJoinToast" class="join-toast">✅ 报名成功！已加入活动</div>
+
+      <!-- 底部 -->
       <div class="bottom-spacer"></div>
       <div class="bottom-bar">
-        <button class="btn-outline" :class="{ faved: isFav }" @click="toggleFav">
-          {{ isFav ? '❤️ 已收藏' : '🤍 收藏' }}
-        </button>
-        <button v-if="item.status === 'open'" class="btn-primary">🙋 我要加入</button>
+        <button class="btn-outline" :class="{ faved: isFav }" @click="toggleFav">{{ isFav ? '❤️ 已收藏' : '🤍 收藏' }}</button>
+        <button v-if="item.status === 'open'" class="btn-primary" @click="handleJoin">🙋 我要加入</button>
         <button v-else class="btn-primary" disabled>已结束</button>
       </div>
     </template>
-
-    <div v-else class="not-found">
-      <p>活动不存在或已被取消</p>
-      <button class="btn-primary" @click="router.push('/group-buy')">返回拼单搭子</button>
-    </div>
+    <div v-else class="not-found"><p>活动不存在或已被取消</p><button class="btn-primary" @click="router.push('/group-buy')">返回拼单搭子</button></div>
   </div>
 </template>
 
@@ -223,129 +206,109 @@ function toggleFav() {
 .detail-view { padding-bottom: 80px; }
 .loading-state { text-align: center; padding: 80px 0; color: var(--color-text-light); }
 
-.header-area {
-  height: 200px;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  position: relative; border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-  margin: -20px -16px 16px; color: #fff;
-}
+.header-area { height: 260px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; border-radius: 0 0 var(--radius-lg) var(--radius-lg); margin: -20px -16px 16px; color: #fff; overflow: hidden; }
 .header-area.ping { background: linear-gradient(135deg, #fef5e7 0%, #f5c842 100%); }
 .header-area.dazi { background: linear-gradient(135deg, #e8f8ef 0%, #7ed6a0 100%); }
 .header-area.team { background: linear-gradient(135deg, #e8f0fe 0%, #90b8f8 100%); }
-.header-icon { font-size: 48px; }
-.header-type { font-size: var(--font-lg); font-weight: 600; margin-top: 8px; }
-.back-btn {
-  position: absolute; top: 16px; left: 16px;
-  background: rgba(255,255,255,0.85); border-radius: 20px; padding: 6px 14px;
-  font-size: var(--font-sm); color: var(--color-text); cursor: pointer; border: none;
-}
+.header-icon { font-size: 48px; } .header-type { font-size: var(--font-lg); font-weight: 600; margin-top: 8px; }
+.back-btn { position: absolute; top: 16px; left: 16px; background: rgba(255,255,255,0.85); border-radius: 20px; padding: 6px 14px; font-size: var(--font-sm); color: var(--color-text); cursor: pointer; border: none; z-index: 2; }
+.share-btn { position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.85); border-radius: 20px; padding: 6px 10px; font-size: var(--font-sm); cursor: pointer; border: none; z-index: 2; }
 
-.card { margin-bottom: 12px; }
+.carousel { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; position: relative; }
+.carousel-img { width: 100%; height: 100%; object-fit: cover; }
+.carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.7); border: none; font-size: 24px; color: #333; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 2; }
+.carousel-btn.prev { left: 8px; } .carousel-btn.next { right: 8px; }
+.carousel-dots { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 2; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.5); cursor: pointer; }
+.dot.active { background: #fff; transform: scale(1.3); }
+.img-count { position: absolute; bottom: 8px; right: 16px; background: rgba(0,0,0,0.5); color: #fff; font-size: var(--font-xs); padding: 2px 10px; border-radius: 10px; z-index: 2; }
 
-.title-row {
-  display: flex; justify-content: space-between; align-items: flex-start;
-  gap: 10px; margin-bottom: 16px;
-}
+.card { margin-bottom: 12px; } h3 { font-size: var(--font-md); font-weight: 600; margin-bottom: 10px; }
+.title-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 16px; }
 .title { font-size: var(--font-lg); font-weight: 600; flex: 1; line-height: 1.4; }
-.status-badge {
-  font-size: var(--font-xs); padding: 3px 10px; border-radius: 10px; font-weight: 500; white-space: nowrap;
-}
-.status-badge.open { background: #e8f8ef; color: #07c160; }
-.status-badge.closed { background: #f0f0f0; color: #909399; }
+.status-badge { font-size: var(--font-xs); padding: 3px 10px; border-radius: 10px; font-weight: 500; white-space: nowrap; }
+.status-badge.open { background: #e8f8ef; color: #07c160; } .status-badge.closed { background: #f0f0f0; color: #909399; }
 
-/* 进度条 */
 .progress-section { margin-bottom: 14px; }
-.progress-bar {
-  height: 10px; background: #e4e7ed; border-radius: 5px; overflow: hidden; margin-bottom: 6px;
-}
-.progress-fill {
-  height: 100%; background: var(--color-primary); border-radius: 5px; transition: width 0.3s;
-  min-width: 8px;
-}
+.progress-bar { height: 10px; background: #e4e7ed; border-radius: 5px; overflow: hidden; margin-bottom: 6px; }
+.progress-fill { height: 100%; background: var(--color-primary); border-radius: 5px; transition: width 0.3s; min-width: 8px; }
 .progress-info { display: flex; justify-content: space-between; }
 .progress-text { font-size: var(--font-sm); font-weight: 600; color: var(--color-primary); }
-.progress-desc { font-size: var(--font-xs); color: var(--color-text-light); }
-.progress-desc.closed { color: #909399; }
+.progress-desc { font-size: var(--font-xs); color: var(--color-text-light); } .progress-desc.closed { color: #909399; }
 
 .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .meta-item { display: flex; flex-direction: column; gap: 2px; }
 .meta-label { font-size: var(--font-xs); color: var(--color-text-light); }
 .meta-value { font-size: var(--font-sm); color: var(--color-text); }
 .meta-value.price { color: var(--color-danger); font-weight: 600; }
-.meta-value.expired { color: var(--color-danger); font-weight: 500; }
+.meta-value.expired { color: var(--color-danger); }
 
-h3 { font-size: var(--font-md); font-weight: 600; margin-bottom: 10px; }
-
-/* 标签 */
 .tags-row { display: flex; gap: 8px; flex-wrap: wrap; }
-.tag {
-  font-size: var(--font-xs); background: #e8f0fe; color: #409eff;
-  padding: 4px 12px; border-radius: 14px;
-}
+.tag { font-size: var(--font-xs); background: #e8f0fe; color: #409eff; padding: 4px 12px; border-radius: 14px; }
 
-/* 描述 */
-.desc-text { font-size: var(--font-sm); color: var(--color-text-secondary); line-height: 1.8; white-space: pre-wrap; }
-.req-text { font-size: var(--font-sm); color: var(--color-text-secondary); line-height: 1.6; }
+.desc-text, .req-text { font-size: var(--font-sm); color: var(--color-text-secondary); line-height: 1.8; white-space: pre-wrap; }
 
-/* 联系 */
-.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.info-item { display: flex; flex-direction: column; gap: 2px; }
-.info-label { font-size: var(--font-xs); color: var(--color-text-light); }
-.info-value { font-size: var(--font-sm); color: var(--color-text); }
+.seller-info { display: flex; align-items: center; gap: 12px; }
+.avatar { font-size: 44px; } .seller-meta { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+.seller-name-row { display: flex; align-items: center; gap: 8px; }
+.seller-name { font-weight: 500; font-size: var(--font-md); }
+.credit-badge { font-size: var(--font-xs); background: #fef5e7; color: #e6a23c; padding: 2px 8px; border-radius: 8px; }
+.seller-contact { font-size: var(--font-sm); color: var(--color-primary); }
+.seller-rate { font-size: var(--font-xs); color: var(--color-text-light); }
 
-/* 参与者 */
 .participant-list { display: flex; flex-direction: column; }
-.participant-item {
-  display: flex; align-items: center; gap: 10px; padding: 8px 0;
-  border-bottom: 1px solid var(--color-border-light);
-}
+.participant-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--color-border-light); }
 .participant-item:last-child { border-bottom: none; }
-.p-avatar { font-size: 24px; }
-.p-name { font-size: var(--font-sm); font-weight: 500; flex: 1; }
+.p-avatar { font-size: 24px; } .p-name { font-size: var(--font-sm); font-weight: 500; flex: 1; }
 .p-time { font-size: var(--font-xs); color: var(--color-text-light); }
 
-/* 管理 */
+/* comments */
+.comment-list { display: flex; flex-direction: column; }
+.comment-item { display: flex; gap: 10px; padding: 12px 0; border-bottom: 1px solid var(--color-border-light); }
+.comment-item:last-child { border-bottom: none; }
+.comment-avatar { font-size: 28px; flex-shrink: 0; } .comment-body { flex: 1; min-width: 0; }
+.comment-top { display: flex; justify-content: space-between; margin-bottom: 4px; }
+.comment-author { font-size: var(--font-sm); font-weight: 500; }
+.comment-time { font-size: var(--font-xs); color: var(--color-text-light); }
+.comment-content { font-size: var(--font-sm); color: var(--color-text-secondary); line-height: 1.5; }
+.no-comments { text-align: center; padding: 16px; color: var(--color-text-light); font-size: var(--font-sm); }
+.comment-form { display: flex; gap: 8px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--color-border-light); }
+.comment-form input { flex: 1; padding: 10px 14px; border: 1px solid var(--color-border); border-radius: 20px; font-size: var(--font-sm); background: var(--color-bg); }
+.comment-submit { padding: 10px 18px; border-radius: 20px; background: var(--color-primary); color: #fff; font-size: var(--font-sm); cursor: pointer; border: none; white-space: nowrap; }
+.comment-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
 .manage-section { display: flex; gap: 10px; }
-.btn-edit, .btn-delete {
-  flex: 1; padding: 10px; border-radius: 8px; font-size: var(--font-sm);
-  cursor: pointer; border: 1px solid var(--color-border); background: var(--color-card); text-align: center;
-}
+.btn-edit, .btn-delete { flex: 1; padding: 10px; border-radius: 8px; font-size: var(--font-sm); cursor: pointer; border: 1px solid var(--color-border); background: var(--color-card); text-align: center; }
 .btn-edit:hover { border-color: var(--color-primary); color: var(--color-primary); }
 .btn-delete:hover { border-color: var(--color-danger); color: var(--color-danger); }
+.report-section { text-align: center; padding: 8px 0; }
+.report-link { font-size: var(--font-xs); color: var(--color-text-light); cursor: pointer; }
+.report-link:hover { color: var(--color-danger); }
 
-.confirm-overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,0.4);
-  display: flex; align-items: center; justify-content: center; z-index: 200;
-}
+.confirm-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; z-index: 200; padding: 20px; }
 .confirm-card { background: #fff; border-radius: 12px; padding: 24px; width: 300px; text-align: center; }
 .confirm-title { font-size: var(--font-lg); font-weight: 600; margin-bottom: 8px; }
 .confirm-text { font-size: var(--font-sm); color: var(--color-text-secondary); margin-bottom: 20px; }
 .confirm-actions { display: flex; gap: 10px; }
-.btn-cancel { flex: 1; padding: 10px; border-radius: 8px; font-size: var(--font-sm); cursor: pointer; background: #f0f0f0; color: var(--color-text-secondary); border: none; }
-.btn-danger { flex: 1; padding: 10px; border-radius: 8px; font-size: var(--font-sm); cursor: pointer; background: var(--color-danger); color: #fff; border: none; }
+.btn-cancel { flex: 1; padding: 10px; border-radius: 8px; background: #f0f0f0; color: var(--color-text-secondary); cursor: pointer; border: none; }
+.btn-danger { flex: 1; padding: 10px; border-radius: 8px; background: var(--color-danger); color: #fff; cursor: pointer; border: none; }
+
+.contact-modal { background: #fff; border-radius: 12px; padding: 24px; width: 340px; text-align: center; }
+.contact-modal-title { font-size: var(--font-lg); font-weight: 600; margin-bottom: 16px; }
+.contact-info-card { background: var(--color-bg); border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.contact-row { display: flex; justify-content: space-between; align-items: center; }
+.contact-label { font-size: var(--font-sm); color: var(--color-text-light); }
+.contact-value { font-size: var(--font-sm); color: var(--color-text); font-weight: 500; }
+.contact-highlight { color: var(--color-primary); font-size: var(--font-md); }
+.contact-tip { margin-top: 12px; font-size: var(--font-xs); color: var(--color-text-light); }
+
+.join-toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%); background: #07c160; color: #fff; padding: 14px 28px; border-radius: 24px; font-size: var(--font-md); font-weight: 600; z-index: 300; box-shadow: 0 4px 20px rgba(7,193,96,0.4); }
 
 .bottom-spacer { height: 70px; }
-.bottom-bar {
-  position: fixed; bottom: 0; left: 0; right: 0;
-  max-width: var(--max-width); margin: 0 auto;
-  display: flex; gap: 10px; padding: 12px 16px;
-  background: var(--color-card); border-top: 1px solid var(--color-border); z-index: 100;
-}
-.btn-outline {
-  flex: 1; padding: 12px; border-radius: 24px;
-  font-size: var(--font-md); background: var(--color-card);
-  border: 1px solid var(--color-primary); color: var(--color-primary); cursor: pointer;
-  transition: all 0.2s;
-}
-.btn-outline.faved {
-  background: #fff5f5;
-  border-color: #f56c6c;
-  color: #f56c6c;
-}
-.btn-primary {
-  flex: 2; padding: 12px; border-radius: 24px;
-  font-size: var(--font-md); background: var(--color-primary); color: #fff; cursor: pointer; border: none;
-}
+.bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; max-width: var(--max-width); margin: 0 auto; display: flex; gap: 10px; padding: 12px 16px; background: var(--color-card); border-top: 1px solid var(--color-border); z-index: 100; }
+.btn-outline { flex: 1; padding: 12px; border-radius: 24px; font-size: var(--font-md); background: var(--color-card); border: 1px solid var(--color-primary); color: var(--color-primary); cursor: pointer; }
+.btn-outline.faved { background: #fff5f5; border-color: #f56c6c; color: #f56c6c; }
+.btn-primary { flex: 2; padding: 12px; border-radius: 24px; font-size: var(--font-md); background: var(--color-primary); color: #fff; cursor: pointer; border: none; }
 .btn-primary[disabled] { background: #c0c4cc; cursor: not-allowed; }
 
 .not-found { text-align: center; padding: 80px 16px; color: var(--color-text-light); }

@@ -133,6 +133,7 @@ function validate(): boolean {
     if (!gbCategory.value) e.gbCategory = '请选择分类'
     if (!gbTargetCount.value || Number(gbTargetCount.value) < 2) e.gbTargetCount = '目标人数至少2人'
     if (!gbDeadline.value) e.gbDeadline = '请选择截止时间'
+    else if (new Date(gbDeadline.value) <= new Date()) e.gbDeadline = '截止时间必须在未来'
     if (!gbLocation.value.trim()) e.gbLocation = '请输入地点'
     if (gbPrice.value === '') e.gbPrice = '请输入价格（免费填0）'
   } else if (activeType.value === 'errand') {
@@ -142,6 +143,7 @@ function validate(): boolean {
     if (!erFrom.value.trim()) e.erFrom = '请输入出发地'
     if (!erTo.value.trim()) e.erTo = '请输入目的地'
     if (!erDeadline.value) e.erDeadline = '请选择截止时间'
+    else if (new Date(erDeadline.value) <= new Date()) e.erDeadline = '截止时间必须在未来'
   }
 
   errors.value = e
@@ -746,7 +748,7 @@ async function loadEditData() {
         </FormField>
 
         <!-- 图片上传 -->
-        <FormField label="图片（最多9张）">
+        <FormField label="图片（最多9张）" hint="建议至少上传1张图片，第一张将作为封面展示">
           <div class="image-upload-section">
             <div v-for="(img, idx) in imagePreviews" :key="idx" class="preview-thumb">
               <img :src="img" alt="预览" />

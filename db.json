@@ -10,8 +10,11 @@
       "publisher": "大四学长",
       "publishTime": "2026-06-28T10:00:00Z",
       "location": "北区宿舍3号楼",
-      "image": "",
-      "images": [],
+      "image": "https://picsum.photos/seed/trade1a/400/300",
+      "images": [
+        "https://picsum.photos/seed/trade1a/400/300",
+        "https://picsum.photos/seed/trade1b/400/300"
+      ],
       "desc": "大一买的，基本全新，只有前面几页有笔记。考研换专业了用不上，便宜出给学弟学妹。",
       "status": "open",
       "views": 128,
@@ -40,8 +43,12 @@
       "publisher": "小李同学",
       "publishTime": "2026-06-28T08:30:00Z",
       "location": "南区宿舍1号楼",
-      "image": "",
-      "images": [],
+      "image": "https://picsum.photos/seed/trade2a/400/300",
+      "images": [
+        "https://picsum.photos/seed/trade2a/400/300",
+        "https://picsum.photos/seed/trade2b/400/300",
+        "https://picsum.photos/seed/trade2c/400/300"
+      ],
       "desc": "自用一年，一直带保护壳和钢化膜，屏幕无划痕，电池健康92%。送原装充电器和保护壳。",
       "status": "open",
       "views": 456,
@@ -71,8 +78,11 @@
       "publisher": "毕业生小王",
       "publishTime": "2026-06-27T16:00:00Z",
       "location": "东区宿舍5号楼",
-      "image": "",
-      "images": [],
+      "image": "https://picsum.photos/seed/trade3a/400/300",
+      "images": [
+        "https://picsum.photos/seed/trade3a/400/300",
+        "https://picsum.photos/seed/trade3b/400/300"
+      ],
       "desc": "三档调光，USB充电，触摸开关。用了不到一学期，毕业带不走。",
       "status": "open",
       "views": 89,
@@ -101,8 +111,12 @@
       "publisher": "小张同学",
       "publishTime": "2026-06-27T14:00:00Z",
       "location": "西区宿舍2号楼",
-      "image": "",
-      "images": [],
+      "image": "https://picsum.photos/seed/trade4a/400/300",
+      "images": [
+        "https://picsum.photos/seed/trade4a/400/300",
+        "https://picsum.photos/seed/trade4b/400/300",
+        "https://picsum.photos/seed/trade4c/400/300"
+      ],
       "desc": "买大了，仅试穿一次。灰色加绒款，适合175-180。",
       "status": "open",
       "views": 210,
@@ -132,8 +146,10 @@
       "publisher": "已上岸学长",
       "publishTime": "2026-06-26T20:00:00Z",
       "location": "图书馆自习室",
-      "image": "",
-      "images": [],
+      "image": "https://picsum.photos/seed/trade5a/400/300",
+      "images": [
+        "https://picsum.photos/seed/trade5a/400/300"
+      ],
       "desc": "去年考研买的，单词背了1/3，练习题全新没写。今年上岸了出给下一届。",
       "status": "open",
       "views": 333,
@@ -161,8 +177,11 @@
       "publisher": "游戏少年",
       "publishTime": "2026-06-26T12:00:00Z",
       "location": "北区宿舍8号楼",
-      "image": "",
-      "images": [],
+      "image": "https://picsum.photos/seed/trade6a/400/300",
+      "images": [
+        "https://picsum.photos/seed/trade6a/400/300",
+        "https://picsum.photos/seed/trade6b/400/300"
+      ],
       "desc": "实习公司发的，用了两个月，手感确实好但不太适合打游戏，换个游戏鼠标所以出。",
       "status": "open",
       "views": 178,
@@ -192,8 +211,12 @@
       "publisher": "音乐爱好者",
       "publishTime": "2026-06-25T18:00:00Z",
       "location": "南区宿舍6号楼",
-      "image": "",
-      "images": [],
+      "image": "https://picsum.photos/seed/trade7a/400/300",
+      "images": [
+        "https://picsum.photos/seed/trade7a/400/300",
+        "https://picsum.photos/seed/trade7b/400/300",
+        "https://picsum.photos/seed/trade7c/400/300"
+      ],
       "desc": "去年双十一购入，还在保。降噪效果很好，配件齐全。",
       "status": "open",
       "views": 520,
@@ -221,8 +244,11 @@
       "publisher": "搬家中",
       "publishTime": "2026-06-25T10:00:00Z",
       "location": "东区宿舍2号楼",
-      "image": "",
-      "images": [],
+      "image": "https://picsum.photos/seed/trade8a/400/300",
+      "images": [
+        "https://picsum.photos/seed/trade8a/400/300",
+        "https://picsum.photos/seed/trade8b/400/300"
+      ],
       "desc": "宿舍自用，无破损，搬家急出。镜面有点灰擦一下就好。",
       "status": "open",
       "views": 67,
@@ -250,8 +276,11 @@
       "publisher": "数码控",
       "publishTime": "2026-06-25T18:00:00Z",
       "location": "西区宿舍3号楼",
-      "image": "",
-      "images": [],
+      "image": "https://picsum.photos/seed/trade9a/400/300",
+      "images": [
+        "https://picsum.photos/seed/trade9a/400/300",
+        "https://picsum.photos/seed/trade9b/400/300"
+      ],
       "desc": "考研期间买的，基本只用来刷网课。全套配件齐全，带原装手写笔和皮套。",
       "status": "open",
       "views": 299,
@@ -281,8 +310,10 @@
       "publisher": "过级达人",
       "publishTime": "2026-06-25T09:00:00Z",
       "location": "南区宿舍2号楼",
-      "image": "",
-      "images": [],
+      "image": "https://picsum.photos/seed/trade10a/400/300",
+      "images": [
+        "https://picsum.photos/seed/trade10a/400/300"
+      ],
       "desc": "今年3月买的，做了大概1/3，铅笔写的可以擦掉。12月考试的同学可以提前备着。",
       "status": "open",
       "views": 156,
@@ -310,8 +341,11 @@
       "publisher": "毕业清仓",
       "publishTime": "2026-06-24T15:00:00Z",
       "location": "北区宿舍7号楼",
-      "image": "",
-      "images": [],
+      "image": "https://picsum.photos/seed/trade11a/400/300",
+      "images": [
+        "https://picsum.photos/seed/trade11a/400/300",
+        "https://picsum.photos/seed/trade11b/400/300"
+      ],
       "desc": "宿舍上铺神器，带杯托和iPad支架槽。毕业带不走，便宜出了。",
       "status": "open",
       "views": 201,
@@ -339,8 +373,12 @@
       "publisher": "鞋控阿杰",
       "publishTime": "2026-06-24T10:00:00Z",
       "location": "东区宿舍1号楼",
-      "image": "",
-      "images": [],
+      "image": "https://picsum.photos/seed/trade12a/400/300",
+      "images": [
+        "https://picsum.photos/seed/trade12a/400/300",
+        "https://picsum.photos/seed/trade12b/400/300",
+        "https://picsum.photos/seed/trade12c/400/300"
+      ],
       "desc": "穿了一个学期，鞋底有正常磨损，鞋面保持很干净。尺码偏大，42码适合平时穿42.5-43的。",
       "status": "open",
       "views": 387,
@@ -370,8 +408,11 @@
       "publisher": "放弃的文艺青年",
       "publishTime": "2026-06-23T20:00:00Z",
       "location": "西区宿舍6号楼",
-      "image": "",
-      "images": [],
+      "image": "https://picsum.photos/seed/trade13a/400/300",
+      "images": [
+        "https://picsum.photos/seed/trade13a/400/300",
+        "https://picsum.photos/seed/trade13b/400/300"
+      ],
       "desc": "大一想学的，买了之后摸了不到10次，弦已松。送变调夹+调音器+琴包。",
       "status": "open",
       "views": 167,
@@ -401,8 +442,11 @@
       "publisher": "码农小刘",
       "publishTime": "2026-06-23T14:00:00Z",
       "location": "南区宿舍4号楼",
-      "image": "",
-      "images": [],
+      "image": "https://picsum.photos/seed/trade14a/400/300",
+      "images": [
+        "https://picsum.photos/seed/trade14a/400/300",
+        "https://picsum.photos/seed/trade14b/400/300"
+      ],
       "desc": "用了大半年的主力键盘，换了无线的所以出。茶轴适合打字和游戏，PBT键帽不打油。",
       "status": "open",
       "views": 234,
@@ -432,8 +476,10 @@
       "publisher": "数学系学长",
       "publishTime": "2026-06-22T11:00:00Z",
       "location": "北区宿舍2号楼",
-      "image": "",
-      "images": [],
+      "image": "https://picsum.photos/seed/trade15a/400/300",
+      "images": [
+        "https://picsum.photos/seed/trade15a/400/300"
+      ],
       "desc": "大二课程的教材，有部分笔记但字迹工整，适合预习和复习用。",
       "status": "open",
       "views": 98,
@@ -461,8 +507,12 @@
       "publisher": "厨神小李",
       "publishTime": "2026-06-21T19:00:00Z",
       "location": "东区宿舍3号楼",
-      "image": "",
-      "images": [],
+      "image": "https://picsum.photos/seed/trade16a/400/300",
+      "images": [
+        "https://picsum.photos/seed/trade16a/400/300",
+        "https://picsum.photos/seed/trade16b/400/300",
+        "https://picsum.photos/seed/trade16c/400/300"
+      ],
       "desc": "一个人刚好，煮饭煮粥煲汤都行。注意：用的时候注意别被宿管发现。",
       "status": "open",
       "views": 445,
@@ -491,8 +541,11 @@
       "publisher": "计算机学长",
       "publishTime": "2026-06-24T09:00:00Z",
       "location": "南区宿舍4号楼",
-      "image": "",
-      "images": [],
+      "image": "https://picsum.photos/seed/trade17a/400/300",
+      "images": [
+        "https://picsum.photos/seed/trade17a/400/300",
+        "https://picsum.photos/seed/trade17b/400/300"
+      ],
       "desc": "课程指定教材，重点章节有标注，期末考试前买来突击用的，考完就出。书况良好无缺页。",
       "status": "closed",
       "views": 187,
@@ -521,8 +574,12 @@
       "publisher": "数码控阿杰",
       "publishTime": "2026-06-25T11:00:00Z",
       "location": "东区宿舍3号楼",
-      "image": "",
-      "images": [],
+      "image": "https://picsum.photos/seed/trade18a/400/300",
+      "images": [
+        "https://picsum.photos/seed/trade18a/400/300",
+        "https://picsum.photos/seed/trade18b/400/300",
+        "https://picsum.photos/seed/trade18c/400/300"
+      ],
       "desc": "买了三个月，戴了不到10次。功能正常，屏幕无划痕，表带几乎全新。换了Apple Watch所以出。包装盒、充电器都在。",
       "status": "done",
       "views": 456,
@@ -552,8 +609,11 @@
       "publisher": "毕业季甩卖",
       "publishTime": "2026-06-23T16:00:00Z",
       "location": "北区宿舍9号楼",
-      "image": "",
-      "images": [],
+      "image": "https://picsum.photos/seed/trade19a/400/300",
+      "images": [
+        "https://picsum.photos/seed/trade19a/400/300",
+        "https://picsum.photos/seed/trade19b/400/300"
+      ],
       "desc": "大二买的，用了两年。夏天冰饮料水果一流，冬天还能暖牛奶。50L容量刚刚好不占地方。毕业带不走。",
       "status": "open",
       "views": 567,
@@ -583,8 +643,12 @@
       "publisher": "抽奖锦鲤",
       "publishTime": "2026-06-26T13:00:00Z",
       "location": "西区宿舍1号楼",
-      "image": "",
-      "images": [],
+      "image": "https://picsum.photos/seed/trade20a/400/300",
+      "images": [
+        "https://picsum.photos/seed/trade20a/400/300",
+        "https://picsum.photos/seed/trade20b/400/300",
+        "https://picsum.photos/seed/trade20c/400/300"
+      ],
       "desc": "学生会年会抽奖抽中的奖品，全新未拆封！自己有AirPods了用不上。京东自营同款599，血亏出。",
       "status": "open",
       "views": 723,
@@ -620,7 +684,9 @@
       "contactPhone": "138xxxx1234",
       "desc": "黑色短款钱包，内有身份证和校园卡，非常重要！",
       "status": "open",
-      "images": [],
+      "images": [
+        "https://picsum.photos/seed/lf1a/400/300"
+      ],
       "reward": 50,
       "claimLocation": "图书馆服务台",
       "resolvedAt": null,
@@ -644,7 +710,10 @@
       "contactPhone": "139xxxx5678",
       "desc": "3把钥匙+1个U盘，请失主联系确认。",
       "status": "open",
-      "images": [],
+      "images": [
+        "https://picsum.photos/seed/lf2a/400/300",
+        "https://picsum.photos/seed/lf2b/400/300"
+      ],
       "reward": null,
       "claimLocation": "操场管理处",
       "resolvedAt": null,
@@ -667,7 +736,9 @@
       "contactPhone": "136xxxx9012",
       "desc": "白色AirPods Pro充电盒，有蓝色保护壳。",
       "status": "open",
-      "images": [],
+      "images": [
+        "https://picsum.photos/seed/lf3a/400/300"
+      ],
       "reward": 30,
       "claimLocation": "教学楼A栋管理员处",
       "resolvedAt": null,
@@ -714,7 +785,10 @@
       "contactPhone": "135xxxx7890",
       "desc": "膳魔师500ml蓝色保温杯，杯身有贴纸。",
       "status": "open",
-      "images": [],
+      "images": [
+        "https://picsum.photos/seed/lf5a/400/300",
+        "https://picsum.photos/seed/lf5b/400/300"
+      ],
       "reward": null,
       "claimLocation": "体育馆前台",
       "resolvedAt": null,
@@ -783,7 +857,9 @@
       "contactPhone": "150xxxx3344",
       "desc": "晨跑时掉了，黑色表带配黑色表盘，屏幕上有一条细微划痕。",
       "status": "open",
-      "images": [],
+      "images": [
+        "https://picsum.photos/seed/lf8a/400/300"
+      ],
       "reward": 20,
       "claimLocation": "操场管理处",
       "resolvedAt": null,
@@ -807,7 +883,9 @@
       "contactPhone": "188xxxx5566",
       "desc": "深蓝色三折伞，天堂牌，挂在走廊栏杆上。",
       "status": "open",
-      "images": [],
+      "images": [
+        "https://picsum.photos/seed/lf9a/400/300"
+      ],
       "reward": null,
       "claimLocation": "教学楼B栋管理员处",
       "resolvedAt": null,
@@ -830,7 +908,9 @@
       "contactPhone": "",
       "desc": "吃饭时忘在桌上了，度数大概300-400度的样子。放食堂失物招领处了。",
       "status": "open",
-      "images": [],
+      "images": [
+        "https://picsum.photos/seed/lf10a/400/300"
+      ],
       "reward": null,
       "claimLocation": "南区食堂失物招领处",
       "resolvedAt": null,
@@ -876,7 +956,9 @@
       "contactPhone": "186xxxx9900",
       "desc": "华为FreeBuds 5i 左耳，白色。翻遍了包包和宿舍都没找到，应该是掉在图书馆了。",
       "status": "open",
-      "images": [],
+      "images": [
+        "https://picsum.photos/seed/lf12a/400/300"
+      ],
       "reward": 15,
       "claimLocation": "图书馆服务台",
       "resolvedAt": null,
@@ -946,7 +1028,10 @@
       "contactPhone": "152xxxx7788",
       "desc": "联想小新Pro14 灰色，忘记在图书馆二楼C区第三个桌子上。里面有重要论文资料！急急急！",
       "status": "open",
-      "images": [],
+      "images": [
+        "https://picsum.photos/seed/lf15a/400/300",
+        "https://picsum.photos/seed/lf15b/400/300"
+      ],
       "reward": 100,
       "claimLocation": "图书馆服务台",
       "resolvedAt": null,
@@ -970,7 +1055,9 @@
       "contactPhone": "180xxxx1122",
       "desc": "一串钥匙上面挂着校园卡，机械工程学院李同学。已经放在操场门卫室了。",
       "status": "open",
-      "images": [],
+      "images": [
+        "https://picsum.photos/seed/lf16a/400/300"
+      ],
       "reward": null,
       "claimLocation": "操场门卫室",
       "resolvedAt": null,
@@ -1018,7 +1105,9 @@
       "contactPhone": "",
       "desc": "CASIO电子词典，英语专业同学常用款。下课后留在语音室桌上了。放语音室前台。",
       "status": "open",
-      "images": [],
+      "images": [
+        "https://picsum.photos/seed/lf18a/400/300"
+      ],
       "reward": null,
       "claimLocation": "语音室前台",
       "resolvedAt": null,
@@ -1045,7 +1134,9 @@
       "publishTime": "2026-06-28T14:00:00Z",
       "desc": "一点点奶茶，两杯起拼，每人约12元。",
       "status": "open",
-      "images": [],
+      "images": [
+        "https://picsum.photos/seed/gb1a/400/300"
+      ],
       "contact": "微信：milktea_lover",
       "participants": [
         {
@@ -1139,7 +1230,9 @@
       "publishTime": "2026-06-28T10:00:00Z",
       "desc": "来个打野，我们四缺一，段位王者，心态好。",
       "status": "open",
-      "images": [],
+      "images": [
+        "https://picsum.photos/seed/gb4a/400/300"
+      ],
       "contact": "微信：gamer_pro",
       "participants": [
         {
@@ -1245,7 +1338,10 @@
       "publishTime": "2026-06-28T16:00:00Z",
       "desc": "万达影院，周六下午场，6人可团购价25元/人（原价40）。目前3人，再拼3人。",
       "status": "open",
-      "images": [],
+      "images": [
+        "https://picsum.photos/seed/gb7a/400/300",
+        "https://picsum.photos/seed/gb7b/400/300"
+      ],
       "contact": "微信：movie_fan",
       "participants": [
         {
@@ -1317,7 +1413,9 @@
       "publishTime": "2026-06-27T20:00:00Z",
       "desc": "三只松鼠零食大礼包，5人拼团价30元/人（原价59），超划算！",
       "status": "open",
-      "images": [],
+      "images": [
+        "https://picsum.photos/seed/gb9a/400/300"
+      ],
       "contact": "微信：snack_king",
       "participants": [
         {
@@ -1465,7 +1563,10 @@
       "publishTime": "2026-06-25T09:00:00Z",
       "desc": "周末爬北山森林公园，轻装往返约4小时。AA制车费和午餐。已有3人。",
       "status": "open",
-      "images": [],
+      "images": [
+        "https://picsum.photos/seed/gb13a/400/300",
+        "https://picsum.photos/seed/gb13b/400/300"
+      ],
       "contact": "微信：hiking_fun",
       "participants": [
         {
@@ -1583,7 +1684,10 @@
       "publishTime": "2026-06-28T09:00:00Z",
       "desc": "绕城绿道全程约50公里，预计4-5小时。自带自行车（学校门口也有共享单车），沿途风景绝美。",
       "status": "open",
-      "images": [],
+      "images": [
+        "https://picsum.photos/seed/gb16a/400/300",
+        "https://picsum.photos/seed/gb16b/400/300"
+      ],
       "contact": "微信：cycling_fun",
       "participants": [
         {
@@ -1669,7 +1773,9 @@
       "publishTime": "2026-06-28T20:00:00Z",
       "desc": "市博物馆有埃及文物特展，一个人去太无聊了想找人一起。门票自理（学生票30元），看完可以一起吃饭。",
       "status": "open",
-      "images": [],
+      "images": [
+        "https://picsum.photos/seed/gb18a/400/300"
+      ],
       "contact": "微信：museum_lover",
       "participants": [
         {
@@ -1705,7 +1811,9 @@
       "publishTime": "2026-06-28T11:30:00Z",
       "desc": "一份红烧肉盖饭+一瓶矿泉水，送到南区3号楼302。",
       "status": "open",
-      "images": [],
+      "images": [
+        "https://picsum.photos/seed/er1a/400/300"
+      ],
       "contact": "微信：lazy_dorm",
       "urgency": "high",
       "acceptor": null,
@@ -1776,7 +1884,9 @@
       "publishTime": "2026-06-28T13:00:00Z",
       "desc": "一份学生会活动审批表，需要送到行政楼3楼办公室。",
       "status": "done",
-      "images": [],
+      "images": [
+        "https://picsum.photos/seed/er4a/400/300"
+      ],
       "contact": "微信：student_union",
       "urgency": "high",
       "acceptor": "热心小张",
@@ -1847,7 +1957,9 @@
       "publishTime": "2026-06-28T20:00:00Z",
       "desc": "学校后门那家网红面包店，周末要排很久。帮我买两个牛角包+一个吐司。",
       "status": "open",
-      "images": [],
+      "images": [
+        "https://picsum.photos/seed/er7a/400/300"
+      ],
       "contact": "微信：bread_lover",
       "urgency": "low",
       "acceptor": null,
@@ -1895,7 +2007,9 @@
       "publishTime": "2026-06-28T21:00:00Z",
       "desc": "一份炒面+一瓶冰可乐，送到实验楼B栋5楼。电梯到4楼，走一层到5楼。",
       "status": "open",
-      "images": [],
+      "images": [
+        "https://picsum.photos/seed/er9a/400/300"
+      ],
       "contact": "微信：lab_dog",
       "urgency": "medium",
       "acceptor": null,
@@ -1966,7 +2080,9 @@
       "publishTime": "2026-06-27T12:00:00Z",
       "desc": "学校统一换寝，主要是一个行李箱+一个编织袋+一箱书。有电梯，大概半小时能搞定。",
       "status": "in_progress",
-      "images": [],
+      "images": [
+        "https://picsum.photos/seed/er12a/400/300"
+      ],
       "contact": "微信：moving_wang",
       "urgency": "low",
       "acceptor": "大力士阿强",
@@ -2038,7 +2154,9 @@
       "publishTime": "2026-06-29T10:00:00Z",
       "desc": "入职体检报告已出，需要去体检中心窗口领取（报名字和学号即可）。送到研究生3号楼。",
       "status": "open",
-      "images": [],
+      "images": [
+        "https://picsum.photos/seed/er15a/400/300"
+      ],
       "contact": "微信：report_pick",
       "urgency": "medium",
       "acceptor": null,
@@ -2110,7 +2228,10 @@
       "publishTime": "2026-06-28T18:00:00Z",
       "desc": "7月8日上午体育馆现场售票，帮忙排队抢两张票（限购2张）。排队费用30元，票钱另外给。",
       "status": "open",
-      "images": [],
+      "images": [
+        "https://picsum.photos/seed/er18a/400/300",
+        "https://picsum.photos/seed/er18b/400/300"
+      ],
       "contact": "微信：star_chaser",
       "urgency": "medium",
       "acceptor": null,
@@ -2162,6 +2283,128 @@
       "content": "您的商品「高等数学」已通过审核，展示在二手交易页面",
       "time": "2026-06-26T10:00:00Z",
       "unread": false
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "itemType": "trade",
+      "itemId": 2,
+      "author": "想买的学生",
+      "content": "请问还在吗？可以小刀吗？",
+      "time": "2026-06-29T10:00:00Z"
+    },
+    {
+      "id": 2,
+      "itemType": "trade",
+      "itemId": 2,
+      "author": "小李同学",
+      "content": "还在的，价格可以商量，加微信聊吧",
+      "time": "2026-06-29T10:30:00Z"
+    },
+    {
+      "id": 3,
+      "itemType": "trade",
+      "itemId": 7,
+      "author": "耳机爱好者",
+      "content": "还在保的话我要了，怎么联系？",
+      "time": "2026-06-29T09:00:00Z"
+    },
+    {
+      "id": 4,
+      "itemType": "trade",
+      "itemId": 7,
+      "author": "音乐爱好者",
+      "content": "已出，谢谢关注",
+      "time": "2026-06-29T14:00:00Z"
+    },
+    {
+      "id": 5,
+      "itemType": "lostFound",
+      "itemId": 1,
+      "author": "好心人",
+      "content": "我在图书馆看到一个黑色钱包，已经交到服务台了，你去问问",
+      "time": "2026-06-28T14:00:00Z"
+    },
+    {
+      "id": 6,
+      "itemType": "lostFound",
+      "itemId": 1,
+      "author": "张同学",
+      "content": "谢谢！我马上去看",
+      "time": "2026-06-28T14:15:00Z"
+    },
+    {
+      "id": 7,
+      "itemType": "lostFound",
+      "itemId": 15,
+      "author": "图书馆常客",
+      "content": "昨天在二楼C区确实看到一台笔记本，好像被管理员收走了",
+      "time": "2026-06-29T17:30:00Z"
+    },
+    {
+      "id": 8,
+      "itemType": "groupBuy",
+      "itemId": 4,
+      "author": "想上分",
+      "content": "我来打野！王者50星，加我微信",
+      "time": "2026-06-28T12:00:00Z"
+    },
+    {
+      "id": 9,
+      "itemType": "groupBuy",
+      "itemId": 7,
+      "author": "路人甲",
+      "content": "周六下午我有空！还有位置吗？",
+      "time": "2026-06-28T17:00:00Z"
+    },
+    {
+      "id": 10,
+      "itemType": "groupBuy",
+      "itemId": 7,
+      "author": "电影搭子",
+      "content": "有的有的，加微信聊",
+      "time": "2026-06-28T17:10:00Z"
+    },
+    {
+      "id": 11,
+      "itemType": "errand",
+      "itemId": 1,
+      "author": "刚好在北区",
+      "content": "我正好在北区食堂，帮你带。微信联系",
+      "time": "2026-06-28T11:45:00Z"
+    },
+    {
+      "id": 12,
+      "itemType": "errand",
+      "itemId": 6,
+      "author": "打印店老板",
+      "content": "已打印好，在店里等着取",
+      "time": "2026-06-28T10:00:00Z"
+    },
+    {
+      "id": 13,
+      "itemType": "trade",
+      "itemId": 20,
+      "author": "数码控",
+      "content": "全新的话380真的很划算！可惜我已经买了",
+      "time": "2026-06-29T15:00:00Z"
+    },
+    {
+      "id": 14,
+      "itemType": "trade",
+      "itemId": 19,
+      "author": "宿舍管理员",
+      "content": "提醒一下，宿舍用电器不能超过500W哦",
+      "time": "2026-06-29T08:00:00Z"
+    },
+    {
+      "id": 15,
+      "itemType": "lostFound",
+      "itemId": 1,
+      "author": "张同学",
+      "content": "找到了！在图书馆服务台，太感谢了🙏",
+      "time": "2026-06-28T15:00:00Z"
     }
   ]
 }
