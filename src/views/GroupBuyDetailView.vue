@@ -2,10 +2,12 @@
 import { ref, onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { getGroupBuyById, deleteGroupBuy, type GroupBuyItem } from '@/api/groupBuy'
+import { useFavoriteStore } from '@/stores/favorite'
 import { formatTime, formatDateTime, statusLabel, deadlineRemaining } from '@/utils/format'
 
 const route = useRoute()
 const router = useRouter()
+const favoriteStore = useFavoriteStore()
 
 const item = ref<GroupBuyItem | null>(null)
 const loading = ref(true)
@@ -62,6 +64,14 @@ const typeName = computed(() => {
   const map: Record<string, string> = { ping: '拼单', dazi: '搭子', team: '组队' }
   return map[item.value?.type || ''] || '拼单'
 })
+
+const isFav = computed(() => item.value ? favoriteStore.isFavorited(item.value.id, 'groupBuy') : false)
+
+function toggleFav() {
+  if (item.value) {
+    favoriteStore.toggleFavorite(item.value.id, 'groupBuy', item.value.title)
+  }
+}
 </script>
 
 <template>
@@ -194,6 +204,9 @@ const typeName = computed(() => {
 
       <div class="bottom-spacer"></div>
       <div class="bottom-bar">
+        <button class="btn-outline" :class="{ faved: isFav }" @click="toggleFav">
+          {{ isFav ? '❤️ 已收藏' : '🤍 收藏' }}
+        </button>
         <button v-if="item.status === 'open'" class="btn-primary">🙋 我要加入</button>
         <button v-else class="btn-primary" disabled>已结束</button>
       </div>
@@ -315,11 +328,22 @@ h3 { font-size: var(--font-md); font-weight: 600; margin-bottom: 10px; }
 .bottom-bar {
   position: fixed; bottom: 0; left: 0; right: 0;
   max-width: var(--max-width); margin: 0 auto;
-  display: flex; padding: 12px 16px;
+  display: flex; gap: 10px; padding: 12px 16px;
   background: var(--color-card); border-top: 1px solid var(--color-border); z-index: 100;
 }
+.btn-outline {
+  flex: 1; padding: 12px; border-radius: 24px;
+  font-size: var(--font-md); background: var(--color-card);
+  border: 1px solid var(--color-primary); color: var(--color-primary); cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-outline.faved {
+  background: #fff5f5;
+  border-color: #f56c6c;
+  color: #f56c6c;
+}
 .btn-primary {
-  width: 100%; padding: 12px; border-radius: 24px;
+  flex: 2; padding: 12px; border-radius: 24px;
   font-size: var(--font-md); background: var(--color-primary); color: #fff; cursor: pointer; border: none;
 }
 .btn-primary[disabled] { background: #c0c4cc; cursor: not-allowed; }

@@ -10,6 +10,14 @@ import { createErrand, updateErrand, getErrandById, type ErrandFormData } from '
 import FormField from '@/components/FormField.vue'
 import { useUserStore } from '@/stores/user'
 
+// 校园常用地点快捷选择
+const CAMPUS_LOCATIONS = [
+  '北区食堂门口', '南区食堂门口', '东区食堂门口', '图书馆一楼大厅',
+  '教学楼A栋', '教学楼B栋', '体育馆门口', '操场入口',
+  '北区宿舍楼下', '南区宿舍楼下', '东区宿舍楼下', '西区宿舍楼下',
+  '快递驿站', '校门口', '大学生活动中心',
+]
+
 const userStore = useUserStore()
 const route = useRoute()
 const router = useRouter()
@@ -404,6 +412,15 @@ function switchType(type: PublishType) {
   }
 }
 
+function quickFillLocation(target: 'trade' | 'lf' | 'lfClaim' | 'gb' | 'erFrom' | 'erTo', location: string) {
+  if (target === 'trade') tradeLocation.value = location
+  else if (target === 'lf') lfLocation.value = location
+  else if (target === 'lfClaim') lfClaimLocation.value = location
+  else if (target === 'gb') gbLocation.value = location
+  else if (target === 'erFrom') erFrom.value = location
+  else if (target === 'erTo') erTo.value = location
+}
+
 function resetForm() {
   title.value = ''
   desc.value = ''
@@ -577,8 +594,15 @@ async function loadEditData() {
               </select>
             </FormField>
             <FormField label="交易地点" required :error="errors.tradeLocation" class="flex-2">
-              <input v-model="tradeLocation" placeholder="如：北区食堂门口" />
+              <input v-model="tradeLocation" placeholder="如：北区食堂门口" list="loc-list-trade" />
+              <datalist id="loc-list-trade">
+                <option v-for="loc in CAMPUS_LOCATIONS" :key="loc" :value="loc" />
+              </datalist>
             </FormField>
+          </div>
+          <div class="location-chips">
+            <span class="chips-label">快捷填入：</span>
+            <button type="button" v-for="loc in CAMPUS_LOCATIONS.slice(0, 6)" :key="loc" class="loc-chip" @click="quickFillLocation('trade', loc)">{{ loc }}</button>
           </div>
           <FormField label="规格参数" hint="用逗号或换行分隔，格式为 键:值">
             <textarea v-model="tradeSpecsStr" rows="3" placeholder="每行一个参数，格式：品牌:Apple&#10;型号:iPhone 15&#10;颜色:黑色" />
@@ -1021,6 +1045,35 @@ async function loadEditData() {
 .btn-draft-clear:hover {
   border-color: var(--color-danger);
   color: var(--color-danger);
+}
+
+/* 地点快捷选择 */
+.location-chips {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: -8px;
+  margin-bottom: 6px;
+}
+.chips-label {
+  font-size: var(--font-xs);
+  color: var(--color-text-light);
+  white-space: nowrap;
+}
+.loc-chip {
+  font-size: var(--font-xs);
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: all 0.15s;
+  border: 1px solid transparent;
+}
+.loc-chip:hover {
+  background: var(--color-primary);
+  color: #fff;
 }
 
 /* 预览弹窗 */

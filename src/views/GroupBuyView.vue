@@ -2,11 +2,13 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { getGroupBuys, type GroupBuyItem } from '@/api/groupBuy'
+import { useFavoriteStore } from '@/stores/favorite'
 import ItemCard from '@/components/ItemCard.vue'
 import EmptyState from '@/components/EmptyState.vue'
 import { formatTime } from '@/utils/format'
 
 const router = useRouter()
+const favoriteStore = useFavoriteStore()
 const items = ref<GroupBuyItem[]>([])
 const loading = ref(true)
 
@@ -23,6 +25,10 @@ onMounted(async () => {
 
 function goDetail(id: number) {
   router.push(`/group-buy/${id}`)
+}
+
+function toggleFav(id: number, title: string) {
+  favoriteStore.toggleFavorite(id, 'groupBuy', title)
 }
 
 function progressText(item: GroupBuyItem): string {
@@ -52,7 +58,18 @@ function progressText(item: GroupBuyItem): string {
           :status="item.type"
           :highlight="item.price === '0' ? '免费' : '¥' + item.price + '/人'"
           :footer="item.publisher + ' · ' + progressText(item) + ' · ' + formatTime(item.publishTime)"
-        />
+          :favorited="favoriteStore.isFavorited(item.id, 'groupBuy')"
+        >
+          <template #actions>
+            <button
+              class="fav-btn"
+              :class="{ active: favoriteStore.isFavorited(item.id, 'groupBuy') }"
+              @click.stop="toggleFav(item.id, item.title)"
+            >
+              {{ favoriteStore.isFavorited(item.id, 'groupBuy') ? '❤️ 已收藏' : '🤍 收藏' }}
+            </button>
+          </template>
+        </ItemCard>
       </div>
     </div>
   </div>
@@ -79,5 +96,27 @@ function progressText(item: GroupBuyItem): string {
   padding: 60px;
   color: #909399;
   font-size: 14px;
+}
+
+.fav-btn {
+  font-size: 13px;
+  padding: 4px 12px;
+  border-radius: 16px;
+  background: #f5f6fa;
+  color: #909399;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+}
+.fav-btn:hover {
+  border-color: #f56c6c;
+  color: #f56c6c;
+  background: #fff5f5;
+}
+.fav-btn.active {
+  background: #fff5f5;
+  color: #f56c6c;
+  border-color: #f56c6c;
+  font-weight: 500;
 }
 </style>
