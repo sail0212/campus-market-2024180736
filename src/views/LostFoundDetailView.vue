@@ -63,7 +63,6 @@ async function submitComment() {
   finally { submittingComment.value = false }
 }
 
-function goBack() { router.back() }
 function goEdit() {
   if (item.value) router.push({ path: '/publish', query: { type: 'lostFound', edit: String(item.value.id) } })
 }
@@ -96,7 +95,6 @@ const creditScore = computed(() => +(Math.min(5.0, (item.value?.contact || '').l
     <template v-else-if="item">
       <!-- 图片轮播 / 头部 -->
       <div class="header-area" :class="item.type">
-        <button class="back-btn" @click="goBack">← 返回</button>
         <button class="share-btn" title="分享">🔗</button>
         <template v-if="item.images.length > 0">
           <div class="carousel">
@@ -247,7 +245,6 @@ const creditScore = computed(() => +(Math.min(5.0, (item.value?.contact || '').l
 .header-area.found { background: linear-gradient(135deg, #e8f8ef 0%, #a8e6c1 100%); }
 .header-icon { font-size: 48px; }
 .header-type { font-size: var(--font-lg); font-weight: 600; margin-top: 8px; }
-.back-btn { position: absolute; top: 16px; left: 16px; background: rgba(255,255,255,0.85); border-radius: 20px; padding: 6px 14px; font-size: var(--font-sm); color: var(--color-text); cursor: pointer; border: none; z-index: 2; }
 .share-btn { position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.85); border-radius: 20px; padding: 6px 10px; font-size: var(--font-sm); cursor: pointer; border: none; z-index: 2; }
 
 .carousel { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; position: relative; }

@@ -69,10 +69,6 @@ async function submitComment() {
   }
 }
 
-function goBack() {
-  router.back()
-}
-
 function goEdit() {
   if (item.value) {
     router.push({ path: '/publish', query: { type: 'trade', edit: String(item.value.id) } })
@@ -117,7 +113,6 @@ const creditScore = computed(() => {
     <template v-else-if="item">
       <!-- ===== 图片轮播 ===== -->
       <div class="image-area">
-        <button class="back-btn" @click="goBack">← 返回</button>
         <button class="share-btn" title="分享">🔗</button>
 
         <template v-if="item.images.length > 0">
@@ -329,14 +324,6 @@ const creditScore = computed(() => {
   overflow: hidden;
 }
 .img-placeholder { font-size: 80px; }
-.back-btn {
-  position: absolute;
-  top: 16px; left: 16px;
-  background: rgba(255,255,255,0.85);
-  border-radius: 20px; padding: 6px 14px;
-  font-size: var(--font-sm); color: var(--color-text); cursor: pointer; border: none;
-  z-index: 2;
-}
 .share-btn {
   position: absolute;
   top: 16px; right: 16px;
