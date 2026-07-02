@@ -1,26 +1,47 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { getTrades, type TradeItem } from '@/api/trade'
 import { useFavoriteStore } from '@/stores/favorite'
 import ItemCard from '@/components/ItemCard.vue'
 import EmptyState from '@/components/EmptyState.vue'
+import LoadingState from '@/components/LoadingState.vue'
+import ErrorState from '@/components/ErrorState.vue'
+import SearchBar from '@/components/SearchBar.vue'
 import { formatTime } from '@/utils/format'
 
 const router = useRouter()
 const favoriteStore = useFavoriteStore()
 const trades = ref<TradeItem[]>([])
 const loading = ref(true)
+const error = ref(false)
+const searchKeyword = ref('')
 
-onMounted(async () => {
+async function fetchTrades() {
+  loading.value = true
+  error.value = false
   try {
     const res = await getTrades()
     trades.value = res.data
   } catch (e) {
     console.error('获取二手交易列表失败', e)
+    error.value = true
   } finally {
     loading.value = false
   }
+}
+
+onMounted(fetchTrades)
+
+const filteredItems = computed(() => {
+  const kw = searchKeyword.value.toLowerCase()
+  if (!kw) return trades.value
+  return trades.value.filter((item) =>
+    item.title.toLowerCase().includes(kw) ||
+    item.desc.toLowerCase().includes(kw) ||
+    item.category.toLowerCase().includes(kw) ||
+    item.location.toLowerCase().includes(kw)
+  )
 })
 
 function goDetail(id: number) {
@@ -37,16 +58,27 @@ function toggleFav(id: number, title: string) {
     <h2 class="page-title">🔄 二手交易</h2>
     <p class="page-desc">校园闲置物品交易，让每一件物品都找到新主人</p>
 
-    <div v-if="loading" class="loading">加载中…</div>
+    <SearchBar v-if="!loading && !error && trades.length > 0" placeholder="搜索标题、分类、地点…" @search="(kw) => searchKeyword = kw" />
+
+    <LoadingState v-if="loading" />
+
+    <ErrorState v-else-if="error" show-retry @retry="fetchTrades" />
 
     <EmptyState
-      v-else-if="trades.length === 0"
+      v-else-if="filteredItems.length === 0 && searchKeyword"
+      icon="🔍"
+      text="未找到匹配结果"
+      :hint="'没有找到包含「' + searchKeyword + '」的商品'"
+    />
+
+    <EmptyState
+      v-else-if="filteredItems.length === 0"
       icon="📦"
       text="暂无二手交易信息"
     />
 
     <div v-else class="item-list">
-      <div v-for="item in trades" :key="item.id" @click="goDetail(item.id)">
+      <div v-for="item in filteredItems" :key="item.id" @click="goDetail(item.id)">
         <ItemCard
           :title="item.title"
           :subtitle="item.desc"
@@ -86,12 +118,6 @@ function toggleFav(id: number, title: string) {
   display: flex;
   flex-direction: column;
   gap: 10px;
-}
-.loading {
-  text-align: center;
-  padding: 60px;
-  color: #909399;
-  font-size: 14px;
 }
 
 .fav-btn {

@@ -270,7 +270,7 @@ async function submit() {
     clearDraft()
   } catch (err) {
     console.error('发布失败', err)
-    alert('发布失败，请检查json-server是否运行')
+    alert('发布失败！请确保 JSON Server 已启动（在新终端运行 npm run mock），然后重试。')
   } finally {
     isSubmitting.value = false
   }
